@@ -19,19 +19,37 @@ export class HomeComponent implements OnInit {
   },{
     title: "Contact", description: "Quo neque error repudiandae fuga?", button: "Call us"
   }];
+
   selectedIndex = 0;
 
   @Input() indicators = true;
+  @Input() autoSlide = true;
+  @Input() slideInterval = 3000;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    if (this.autoSlide) {
+      this.autoSlideItems();
+    }
+  }
 
+  autoSlideItems():void {
+    setInterval(() => {
+      this.onNextClick();
+    }, this.slideInterval);
   }
 
   selectItem(index: number): void {
     this.selectedIndex = index;
   }
 
+  onNextClick():void {
+    if (this.selectedIndex === (this.items.length - 1)) {
+      this.selectedIndex = 0;
+    } else {
+      this.selectedIndex++;
+    }
+  }
 }

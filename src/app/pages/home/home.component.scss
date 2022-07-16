@@ -140,15 +140,24 @@
 .carousel .carousel-item.item-active{
   display: flex;
   align-items: center;
-  animation: slideMe 0.7s ease-in;
+  animation: fade 1.25s ease;
 }
 
-@keyframes slideMe {
-  0%{
-    transform: skewX(0deg) translateX(100%);
+//@keyframes slideMe {
+//  0%{
+//    transform: skewX(0deg) translateX(100%);
+//  }
+//  100%{
+//    transform: skewX(0deg);
+//  }
+//}
+
+@keyframes fade {
+  from{
+    opacity: 0.3;
   }
-  100%{
-    transform: skewX(0deg);
+  to{
+    opacity: 1;
   }
 }
 
