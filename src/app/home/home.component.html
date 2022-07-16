@@ -1,0 +1,32 @@
+<div class="bg">
+  <div style="height:100vh">
+    <nav class="nav">
+      <img [srcset]="logo"/>
+      <div style="display: flex">
+        <button class="loginBtn">
+          Login
+        </button>
+        <img [srcset]=vector alt="divider" class="img"/>
+        <button class="signupBtn">
+          Sign Up
+        </button>
+      </div>
+    </nav>
+    <div class="carousel">
+      <div *ngFor="let item of items; let i=index" [ngClass]="{'item-active':selectedIndex === i}"
+           class="carousel-item changeDiv">
+        <div style="margin-left: 120px; margin-bottom: 100px">
+          <h1 style="margin: 0" class="title">{{item.title}}</h1>
+          <p class="description">{{item.description}}</p>
+          <button class="playBtn">{{item.button}}</button>
+        </div>
+      </div>
+      <div *ngIf="indicators" class="carousel_nav">
+        <div *ngFor="let dot of items; let i=index" class="dot" [ngClass]="{'active':selectedIndex === i}"
+              (click)="selectItem(i)">
+          <span class="ball" [ngClass]="{'active':selectedIndex === i}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
