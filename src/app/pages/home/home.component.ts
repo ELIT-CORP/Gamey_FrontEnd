@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   @Input() indicators = true;
   @Input() autoSlide = true;
-  @Input() slideInterval = 3000;
+  @Input() slideInterval = 6000;
 
   constructor(private router: Router) {
   }
