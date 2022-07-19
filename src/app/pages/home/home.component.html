@@ -1,13 +1,13 @@
 <div class="bg">
   <div style="height:100vh">
     <nav class="nav">
-      <img [srcset]="logo"/>
+      <img [srcset]="logo" style="margin-right: 20px"/>
       <div style="display: flex">
         <button class="loginBtn">
           Login
         </button>
         <img [srcset]=vector alt="divider" class="img"/>
-        <button class="signupBtn">
+        <button class="signupBtn" (click)="goTo('signup')">
           Sign Up
         </button>
       </div>
@@ -21,11 +21,12 @@
           <button class="playBtn">{{item.button}}</button>
         </div>
       </div>
-      <div *ngIf="indicators" class="carousel_nav">
-        <div *ngFor="let dot of items; let i=index" class="dot" [ngClass]="{'active':selectedIndex === i}"
-              (click)="selectItem(i)">
-          <span class="ball" [ngClass]="{'active':selectedIndex === i}"></span>
-        </div>
+
+    </div>
+    <div *ngIf="indicators" class="carousel-nav">
+      <div *ngFor="let dot of items; let i=index" class="dot" [ngClass]="{'active':selectedIndex === i}"
+           (click)="selectItem(i)">
+        <span class="ball" [ngClass]="{'active':selectedIndex === i}"></span>
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   @Input() autoSlide = true;
   @Input() slideInterval = 3000;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -51,5 +52,9 @@ export class HomeComponent implements OnInit {
     } else {
       this.selectedIndex++;
     }
+  }
+
+  goTo(endpoint: string): void {
+    this.router.navigate([`/${endpoint}`]);
   }
 }
