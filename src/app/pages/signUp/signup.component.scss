@@ -6,6 +6,11 @@
   overflow: hidden;
   background-color: #F6F6F6;
 
+  background-image: url("/assets/images/mask.png");
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +27,7 @@
   box-shadow: 0 4px 5px 3px rgb(2 2 2 / 40%);
   text-align: center;
   position: relative;
+  margin: 0 25px;
 }
 
 .form-title{
@@ -33,7 +39,6 @@
   text-align: center;
 
   padding-top: 50px;
-  //margin-top: 40px;
 }
 
 .form-control{
@@ -62,7 +67,13 @@
   font-size: 30px;
   line-height: 40%;
 
+  cursor: pointer;
+
   background: #EFFB0E;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-inputs{
@@ -81,4 +92,8 @@
   font-family: 'Rubik', sans-serif;
   font-style: normal;
   font-weight: 400;
+}
+
+::ng-deep .mat-button{
+  border-radius: 0 !important;
 }
