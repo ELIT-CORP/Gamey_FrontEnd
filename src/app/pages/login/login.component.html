@@ -1,0 +1,43 @@
+<img *ngIf="!emailValid" src="assets/images/loginEmail.svg" class="mask">
+<img *ngIf="emailValid" src="assets/images/loginPassword.svg" class="mask">
+<div class="bg">
+
+
+  <div class="form-container">
+
+
+    <form [formGroup]="form" class="form" (ngSubmit)="login()">
+      <div class="form-control">
+        <div class="form-inputs">
+          <mat-form-field appearance="legacy" *ngIf="!emailValid" style="z-index: 1000">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" style="z-index: 1000">
+            <mat-error *ngIf="emailControl.hasError('required')">Email é necessário</mat-error>
+            <mat-error *ngIf="emailControl.hasError('email')">
+              Email inválido
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="legacy" *ngIf="emailValid" style="z-index: 1000">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <mat-error *ngIf="passwordControl.hasError('required')">Senha é necessária</mat-error>
+            <mat-error *ngIf="passwordControl.hasError('minlength')">É necessário no mínimo 8 caracteres</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <button class="form-btn"
+              [disabled]="emailControl.status === 'INVALID'"
+              mat-button (click)="goFoward()"
+              *ngIf="!emailValid">
+        Next
+      </button>
+      <button type="submit"
+              [disabled]="!form.valid"
+              class="form-btn"
+              mat-button *ngIf="emailValid">
+        <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
+        <p *ngIf="!isLoading">Logar</p>
+      </button>
+    </form>
+  </div>
+</div>

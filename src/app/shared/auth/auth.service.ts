@@ -41,12 +41,21 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['']);
         });
         this.SetUserData(result.user);
+        this.notifications.success(
+          'Sucesso',
+          'Login feito com sucesso',
+        )
+        return result;
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.notifications.error(
+          'Erro',
+          error.message,
+        )
+        return error.message;
       });
   }
 

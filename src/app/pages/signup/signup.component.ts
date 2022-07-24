@@ -15,11 +15,6 @@ export class SignUpComponent implements OnInit {
   form!: FormGroup;
   isLoading: boolean = false;
 
-
-  get f() {
-    return this.form.controls;
-  }
-
   get emailControl() {
     return this.form.get('email') as FormControl;
   }
