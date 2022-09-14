@@ -1,0 +1,30 @@
+<div class="choose-skill">
+    <h1>Escolha suas Habilidades</h1>
+   <section>
+        <div class="img-container">
+            <img src="{{selectedDino}}"/>
+            <img src="/assets/images/altar.png"/>
+        </div>
+        <div class="skills-container" [formGroup]="form">      
+            <p>Hard Skills</p>
+            <mat-radio-group formControlName="hardSkill" class="skills">
+                <mat-radio-button [value]="1" disableRipple="true"><img src="/assets/character/Hard/axe.png" /></mat-radio-button>
+                <mat-radio-button [value]="2" disableRipple="true"><img src="/assets/character/Hard/crossbow.png" /></mat-radio-button>
+                <mat-radio-button [value]="3" disableRipple="true"><img src="/assets/character/Hard/dagger.png" /></mat-radio-button>
+                <mat-radio-button [value]="4" disableRipple="true"><img src="/assets/character/Hard/shield.png" /></mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Hard/staff.png" /></mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Hard/sword.png" /></mat-radio-button>
+            </mat-radio-group>
+            <p>Soft Skills</p>
+            <mat-radio-group formControlName="softSkill" class="skills">
+                <mat-radio-button [value]="1" disableRipple="true"><img src="/assets/character/Soft/armor.png" /></mat-radio-button>
+                <mat-radio-button [value]="2" disableRipple="true"><img src="/assets/character/Soft/backpack.png" /></mat-radio-button>
+                <mat-radio-button [value]="3" disableRipple="true"><img src="/assets/character/Soft/gauntlet.png" /></mat-radio-button>
+                <mat-radio-button [value]="4" disableRipple="true"><img src="/assets/character/Soft/neckless.png" /></mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Soft/pants.png" /></mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Soft/potion.png" /></mat-radio-button>
+            </mat-radio-group>
+        </div>
+   </section>
+   <button class="nes-btn" [ngClass]="this.form.valid ? 'is-success' : 'is-disabled'" (click)="register()">Cadastrar</button>
+</div>

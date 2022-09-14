@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/signup/signup.component';
+import { SelectCharacter } from './pages/signup/select-character';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from "@angular/material/core";
@@ -20,18 +21,23 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonModule} from "@angular/material/button";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { LoginComponent } from './pages/login/login.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { SelectSkills } from './pages/signup/select-skills';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    SelectCharacter,
+    SelectSkills
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatRadioModule,
     MatNativeDateModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

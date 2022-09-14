@@ -62,19 +62,19 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  register(): void {
-    this.isLoading = true;
-    this.authService.SignUp(
-      this.emailControl.value,
-      this.passwordControl.value,
-    ).then((r: any) => {
-      if (r != null) {
-        if (typeof r == 'string') {
-          this.isLoading = false;
-        } else {
-          this.router.navigate([`/dashboard`]);
-        }
-      }
-    })
+  selectCharacter(): void {
+    this.router.navigate([`/signup/select-character`]);
+    // this.authService.SignUp(
+    //   this.emailControl.value,
+    //   this.passwordControl.value,
+    // ).then((r: any) => {
+    //   if (r != null) {
+    //     if (typeof r == 'string') {
+    //       this.isLoading = false;
+    //     } else {
+    //       this.router.navigate([`/dashboard`]);
+    //     }
+    //   }
+    // })
   }
 }

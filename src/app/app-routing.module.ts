@@ -2,7 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {SignUpComponent} from './pages/signup/signup.component';
-import {LoginComponent} from "./pages/login/login.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { SelectCharacter } from './pages/signup/select-character';
+import { SelectSkills } from './pages/signup/select-skills';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'signup/select-character',
+    component: SelectCharacter
+  },
+  {
+    path: 'signup/select-skills',
+    component: SelectSkills
   }
 ];
 
