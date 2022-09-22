@@ -16,15 +16,21 @@ export class SelectCharacter implements OnInit {
     dinoBlue: string = "/assets/character/dinoBlue.png";
     dinoGreen: string = "/assets/character/dinoGreen.png";
     dinoYellow: string = "/assets/character/dinoYellow.png";
+    user: any;
 
     selectedCharacter!: string;
 
     get f(): any { return this.characterForm.controls; }
 
+    get characterControl() {
+        return this.characterForm.get('character') as FormControl;
+    }
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService) {
     }
 
     ngOnInit(): void {
+        this.user = localStorage.getItem('tempUserData');
+        this.user = JSON.parse(this.user);
         this.createFormGroup();
     }
 
@@ -32,11 +38,16 @@ export class SelectCharacter implements OnInit {
         this.characterForm = this.formBuilder.group({
             character: ['', [Validators.required]],
         });
-        this.characterForm.valueChanges.subscribe(data => {
-            console.log(data)
-        });
     }
     chooseSkills(){
+        const model = {
+            username: this.user.username,
+            email: this.user.email,
+            password: this.user.password,
+            character: this.characterControl.value
+        }
+
+        localStorage.setItem('tempUserData', JSON.stringify(model));
         this.router.navigate([`/signup/select-skills`]);
     }
     

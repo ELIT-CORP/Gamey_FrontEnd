@@ -8,6 +8,11 @@
       <div class="form-control">
         <div class="form-inputs">
           <mat-form-field appearance="legacy">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="usernameControl.hasError('required')">Nome de usuario é necessário</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="legacy">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="email">
             <mat-error *ngIf="emailControl.hasError('required')">Email é necessário</mat-error>

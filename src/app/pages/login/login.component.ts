@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         if (typeof r == 'string') {
           this.isLoading = false;
         } else {
-          this.router.navigate([`/dashboard`]);
+          this.router.navigate([`/profile`]);
         }
       }
     })

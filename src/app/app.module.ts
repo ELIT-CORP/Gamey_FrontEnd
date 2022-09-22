@@ -23,6 +23,7 @@ import {SimpleNotificationsModule} from "angular2-notifications";
 import { LoginComponent } from './pages/login/login.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { SelectSkills } from './pages/signup/select-skills';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SelectSkills } from './pages/signup/select-skills';
     SignUpComponent,
     LoginComponent,
     SelectCharacter,
-    SelectSkills
+    SelectSkills,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

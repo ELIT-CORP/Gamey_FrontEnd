@@ -15,6 +15,10 @@ export class SignUpComponent implements OnInit {
   form!: FormGroup;
   isLoading: boolean = false;
 
+  get usernameControl() {
+    return this.form.get('username') as FormControl;
+  }
+
   get emailControl() {
     return this.form.get('email') as FormControl;
   }
@@ -31,12 +35,14 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.removeItem('tempUserData');
     this.createFormGroup();
   }
 
   createFormGroup(): void {
     this.form = this.formBuilder.group({
       // Validators.pattern(passwordPattern)
+      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       conpassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -63,18 +69,12 @@ export class SignUpComponent implements OnInit {
   }
 
   selectCharacter(): void {
+    const model = {
+      username: this.usernameControl.value,
+      email: this.emailControl.value,
+      password: this.passwordControl.value
+    }
+    localStorage.setItem('tempUserData', JSON.stringify(model));
     this.router.navigate([`/signup/select-character`]);
-    // this.authService.SignUp(
-    //   this.emailControl.value,
-    //   this.passwordControl.value,
-    // ).then((r: any) => {
-    //   if (r != null) {
-    //     if (typeof r == 'string') {
-    //       this.isLoading = false;
-    //     } else {
-    //       this.router.navigate([`/dashboard`]);
-    //     }
-    //   }
-    // })
   }
 }

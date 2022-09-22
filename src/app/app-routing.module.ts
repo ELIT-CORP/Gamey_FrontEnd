@@ -5,6 +5,7 @@ import {SignUpComponent} from './pages/signup/signup.component';
 import { LoginComponent } from "./pages/login/login.component";
 import { SelectCharacter } from './pages/signup/select-character';
 import { SelectSkills } from './pages/signup/select-skills';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'signup/select-skills',
     component: SelectSkills
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

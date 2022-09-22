@@ -10,22 +10,24 @@ export class HomeComponent implements OnInit {
   public logo = "/assets/images/logo.png";
   public vector = "/assets/images/vector.svg";
   public items: any = [{
-    title: "Product",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-    button: "Play"
+    title: "O Jogo",
+    description: "Avance na sua carreira de forma divertida e dinâmica! Veja as vagas disponíveis na masmorra:",
+    button: "Jogar"
   }, {
-    title: "Service", description: "Veritatis\n" +
-      "obcaecati enetur iure eius earum ut olestias architecto voluptate liquam\n" +
-      "nihil, eveniet aliquid culpa officia aut!", button: "See Documentation"
+    title: "Como Funciona",
+    description: "Aplique para vagas e teste suas habilidades avançando de fases, de forma dinâmica e eficiente! Caso prefira, é possível trocar para um modelo tradicional de avaliação também!",
+    button: "Ver Documentação"
   },{
-    title: "Contact", description: "Quo neque error repudiandae fuga?", button: "Call us"
+    title: "Contato", 
+    description: "Tem alguma dúvida ou sugestão?", 
+    button: "Fale Conosco"
   }];
 
   selectedIndex = 0;
 
   @Input() indicators = true;
   @Input() autoSlide = true;
-  @Input() slideInterval = 6000;
+  @Input() slideInterval = 10000;
 
   constructor(private router: Router) {
   }

@@ -6,23 +6,89 @@
             <img src="/assets/images/altar.png"/>
         </div>
         <div class="skills-container" [formGroup]="form">      
-            <p>Hard Skills</p>
+            <p class="tittle">Hard Skills</p>
             <mat-radio-group formControlName="hardSkill" class="skills">
-                <mat-radio-button [value]="1" disableRipple="true"><img src="/assets/character/Hard/axe.png" /></mat-radio-button>
-                <mat-radio-button [value]="2" disableRipple="true"><img src="/assets/character/Hard/crossbow.png" /></mat-radio-button>
-                <mat-radio-button [value]="3" disableRipple="true"><img src="/assets/character/Hard/dagger.png" /></mat-radio-button>
-                <mat-radio-button [value]="4" disableRipple="true"><img src="/assets/character/Hard/shield.png" /></mat-radio-button>
-                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Hard/staff.png" /></mat-radio-button>
-                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Hard/sword.png" /></mat-radio-button>
+                <mat-radio-button [value]="1" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/axe.png" />
+                        <p class="name">Java</p>
+                    </div>
+                </mat-radio-button>
+                <mat-radio-button [value]="2" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/crossbow.png" />
+                        <p class="name">Gestão de projetos</p>
+                    </div>
+                </mat-radio-button>
+                <mat-radio-button [value]="3" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/sword.png" />
+                        <p class="name">Inglês</p>
+                    </div>
+                </mat-radio-button>
+                <mat-radio-button [value]="4" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/shield.png" />
+                        <p class="name">Manejo de pessoas</p>
+                    </div>
+                </mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/staff.png" />
+                        <p class="name">Raciocínio analítico</p>
+                    </div>
+                </mat-radio-button>
+                <mat-radio-button [value]="5" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Hard/dagger.png" />
+                        <p class="name">UX/UI</p>
+                    </div>
+                </mat-radio-button>
             </mat-radio-group>
-            <p>Soft Skills</p>
+            <p class="tittle">Soft Skills</p>
             <mat-radio-group formControlName="softSkill" class="skills">
-                <mat-radio-button [value]="1" disableRipple="true"><img src="/assets/character/Soft/armor.png" /></mat-radio-button>
-                <mat-radio-button [value]="2" disableRipple="true"><img src="/assets/character/Soft/backpack.png" /></mat-radio-button>
-                <mat-radio-button [value]="3" disableRipple="true"><img src="/assets/character/Soft/gauntlet.png" /></mat-radio-button>
-                <mat-radio-button [value]="4" disableRipple="true"><img src="/assets/character/Soft/neckless.png" /></mat-radio-button>
-                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Soft/pants.png" /></mat-radio-button>
-                <mat-radio-button [value]="5" disableRipple="true"><img src="/assets/character/Soft/potion.png" /></mat-radio-button>
+                <mat-radio-button [value]="1" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/armor.png" />
+                        <p class="name">Comunicação</p>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button [value]="2" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/backpack.png" />
+                        <p class="name">Adaptabilidade</p>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button [value]="3" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/gauntlet.png" />
+                        <p class="name">Colaboração</p>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button [value]="4" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/neckless.png" />
+                        <p class="name">Resiliência</p>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button [value]="5" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/pants.png" />
+                        <p class="name">Criatividade</p>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button [value]="5" disableRipple="true">
+                    <div class="item">
+                        <img src="/assets/character/Soft/potion.png" />
+                        <p class="name">Manejo do tempo</p>
+                    </div>
+                </mat-radio-button>
+
             </mat-radio-group>
         </div>
    </section>

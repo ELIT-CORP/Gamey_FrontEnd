@@ -1,7 +1,7 @@
 <div class="bg">
   <div style="height:100vh">
     <nav class="nav">
-      <img [srcset]="logo" style="margin-right: 20px"/>
+      <img [srcset]="logo" style="margin-right: 20px; max-height: 100px;"/>
       <div style="display: flex">
         <button class="loginBtn" (click)="goTo('login')">
           Login
@@ -15,7 +15,7 @@
     <div class="carousel">
       <div *ngFor="let item of items; let i=index" [ngClass]="{'item-active':selectedIndex === i}"
            class="carousel-item changeDiv">
-        <div style="margin-left: 120px; margin-bottom: 100px">
+        <div style="margin-left: 120px; margin-bottom: 100px" class="item">
           <h1 style="margin: 0" class="title">{{item.title}}</h1>
           <p class="description">{{item.description}}</p>
           <button class="playBtn">{{item.button}}</button>
