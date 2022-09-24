@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../shared/auth/auth.service";
+import {AuthService} from "../../shared/auth.service";
 import {Router} from "@angular/router";
 import {NotificationsService} from "angular2-notifications";
 
@@ -68,13 +68,8 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  selectCharacter(): void {
-    const model = {
-      username: this.usernameControl.value,
-      email: this.emailControl.value,
-      password: this.passwordControl.value
-    }
-    localStorage.setItem('tempUserData', JSON.stringify(model));
-    this.router.navigate([`/signup/select-character`]);
+  register(){
+    // this.authService.SignUp(this.usernameControl.value, this.emailControl.value, this.passwordControl.value);
+    this.router.navigate(['/select-character']);
   }
 }

@@ -3,11 +3,10 @@
     <nav class="nav">
       <img [srcset]="logo" style="margin-right: 20px; max-height: 100px;"/>
       <div style="display: flex">
-        <button class="loginBtn" (click)="goTo('login')">
+        <button class="loginBtn nes-btn is-success" (click)="goTo('login')">
           Login
         </button>
-        <img [srcset]=vector alt="divider" class="img"/>
-        <button class="signupBtn" (click)="goTo('signup')">
+        <button class="signupBtn nes-btn is-warning" (click)="goTo('signup')">
           Sign Up
         </button>
       </div>
@@ -18,7 +17,7 @@
         <div style="margin-left: 120px; margin-bottom: 100px" class="item">
           <h1 style="margin: 0" class="title">{{item.title}}</h1>
           <p class="description">{{item.description}}</p>
-          <button class="playBtn">{{item.button}}</button>
+          <button class="playBtn nes-btn is-warning">{{item.button}}</button>
         </div>
       </div>
 

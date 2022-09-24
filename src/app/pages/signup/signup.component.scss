@@ -64,34 +64,35 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 40%;
-
   cursor: pointer;
-
   background: #EFFB0E;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  &::after {
+      box-shadow: inset -4px -4px hsl(63, 57%, 52%) !important;
+  }
 }
-
 .form-inputs{
   display: flex;
   flex-direction: column;
   //margin-top: 15%;
   padding: 50px 40px 35px;
 }
-
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+:host ::ng-deep .mat-button-wrapper p {
+  margin-bottom: 0 !important;
+}
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: rgba(0,0,0,1);
 }
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
   color: rgba(0,0,0,1);
   font-family: 'Rubik', sans-serif;
   font-style: normal;
   font-weight: 400;
 }
 
-::ng-deep .mat-button{
+:host ::ng-deep .mat-button{
   border-radius: 0 !important;
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../shared/auth/auth.service";
+import { AuthService } from "../../shared/auth.service";
 import { Router } from "@angular/router";
 import { NotificationsService } from "angular2-notifications";
+import { FirestoreDataService } from "src/app/shared/firestore-data.service";
+import { User } from "firebase/auth";
 
 @Component({
     selector: 'select-skills',
@@ -23,7 +25,7 @@ export class SelectSkills implements OnInit {
     get softSkillControl() {
         return this.form.get('softSkill') as FormControl;
     }
-    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService) {
+    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
     }
 
     ngOnInit(): void {
@@ -38,18 +40,19 @@ export class SelectSkills implements OnInit {
             hardSkill: [''],
         });
     }
-    register() {
-        this.authService.SignUp(this.user.email, this.user.password);
-        this.router.navigate([`/profile`]);
-        const model = {
-            uid: JSON.parse(localStorage.getItem('user')!),
-            username: this.user.username,
-            email: this.user.email,
-            character: this.user.character,
-            hardSkill: this.hardSkillControl.value,
-            softSkill: this.softSkillControl.value,
-        }
-        localStorage.setItem('userInfo', JSON.stringify(model));
+    updateUser() {
+        let dataUser = JSON.parse(localStorage.getItem('user')!);
+        console.log(dataUser);
+        // this.router.navigate([`/profile`]);
+        // const model: User = {
+        //     uid: dataUser.uid,
+        //     username: this.user.username,
+        //     email: this.user.email,
+        //     character: this.user.character,
+        //     hardSkill: this.hardSkillControl.value,
+        //     softSkill: this.softSkillControl.value,
+        // }
+        // this.afs.addUser(model);
     }
 
 }

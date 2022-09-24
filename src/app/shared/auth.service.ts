@@ -1,13 +1,9 @@
 import {Injectable, NgZone} from '@angular/core';
-import {User} from '../services/user';
 import * as auth from 'firebase/auth';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
 import {Router} from '@angular/router';
 import {NotificationsService} from "angular2-notifications";
+import { updateProfile } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +11,10 @@ import {NotificationsService} from "angular2-notifications";
 export class AuthService {
   userData: any; // Save logged in user data
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
-    , private notifications: NotificationsService
+    public ngZone: NgZone,
+    private notifications: NotificationsService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -43,7 +38,6 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['']);
         });
-        this.SetUserData(result.user);
         this.notifications.success(
           'Sucesso',
           'Login feito com sucesso',
@@ -60,19 +54,16 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(displayName: string, email: string, password: string): Promise<void> {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        // this.SendVerificationMail();
-        this.SetUserData(result.user);
+      .then((userCred: any) => {
+        updateProfile(userCred.user, {displayName})
         this.notifications.success(
           'Sucesso',
           'Cadastro feito com sucesso',
         )
-        return result;
+        return userCred;
       })
       .catch((error) => {
         this.notifications.error(
@@ -127,31 +118,10 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['']);
         });
-        this.SetUserData(result.user);
       })
       .catch((error) => {
         window.alert(error);
       });
-  }
-
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-      username: user.username,
-      email: user.email,
-      character: user.character,
-      hardSkill: user.hardSkill,
-      softSkill: user.softSkill,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
   }
 
   // Sign out

@@ -13,13 +13,11 @@
   justify-content: space-between;
   height: 100px;
   padding: 40px 120px 0;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .loginBtn{
-  position: absolute;
-  margin-top: 12px;
-  z-index: 11;
-
   font-family: 'Oswald', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -28,11 +26,6 @@
 
   width: 116px;
   height: 50px;
-  background: #98CE00;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 1px;
-  border: 0;
-  cursor: pointer;
 }
 
 .img{
@@ -43,7 +36,6 @@
 
 .signupBtn{
   position: relative;
-  margin-left: 97px;
 
   font-family: 'Oswald', sans-serif;
   font-style: normal;
@@ -52,12 +44,7 @@
   line-height: 40%;
   width: 118px;
   height: 50px;
-  background: #EFFB0E;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 1px;
-  border: 0;
-  cursor: pointer;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 .item{
   display: flex;
@@ -112,16 +99,8 @@
   line-height: 20px;
   letter-spacing: 0.08em;
 
-  color: #020202;
-  cursor: pointer;
-
-  background: #EFFB0E;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
-  border: 0;
   margin-top: 20px;
 }
-
 .carousel{
   height: calc(100% - 150px);
   overflow: hidden;

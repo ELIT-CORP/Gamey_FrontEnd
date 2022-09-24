@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import { FirestoreDataService } from 'src/app/shared/firestore-data.service';
+import { User } from 'src/app/model/user'; 
 
 @Component({
   selector: 'home',
@@ -24,18 +26,26 @@ export class HomeComponent implements OnInit {
   }];
 
   selectedIndex = 0;
+  arr: User[] = []; 
 
   @Input() indicators = true;
   @Input() autoSlide = true;
   @Input() slideInterval = 10000;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public _data: FirestoreDataService) {
+
   }
 
   ngOnInit(): void {
     if (this.autoSlide) {
       this.autoSlideItems();
     }
+    this._data.getUsers().subscribe(
+      (result: any) => {
+        this.arr = result;
+        console.log(this.arr);
+      }
+    );  
   }
 
   autoSlideItems():void {

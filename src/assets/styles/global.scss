@@ -134,3 +134,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+.is-success {
+    background: hsl(76, 100%, 40%) !important;
+
+    &::after {
+        box-shadow: inset -4px -4px hsl(76, 90%, 32%) !important;
+    }
+}
+
+.is-warning {
+    background: hsl(63, 97%, 52%) !important;
+
+    &::after {
+        box-shadow: inset -4px -4px hsl(63, 57%, 52%) !important;
+    }
+}
