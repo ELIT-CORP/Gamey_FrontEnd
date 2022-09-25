@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/signup/signup.component';
-import { SelectCharacter } from './pages/character/select-character';
+import { CharacterComponent } from './pages/character/character.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from "@angular/material/core";
@@ -22,8 +22,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { LoginComponent } from './pages/login/login.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { SelectSkills } from './pages/character/select-skills';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -31,8 +31,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HomeComponent,
     SignUpComponent,
     LoginComponent,
-    SelectCharacter,
-    SelectSkills,
+    CharacterComponent,
     ProfileComponent
   ],
   imports: [
@@ -40,6 +39,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     AppRoutingModule,
     FormsModule,
     MatRadioModule,
+    MatButtonToggleModule,
     MatNativeDateModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

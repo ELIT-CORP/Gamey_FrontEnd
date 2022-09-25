@@ -1,0 +1,23 @@
+<div class="container" [style]="'background: rgb(238, 249, 213); background: radial-gradient(circle, rgb(218, 218, 218) 10%,'+ bgColor + '100%)'">
+    <div class="form-container" [formGroup]="characterForm">
+        <p class="title">Criação de Personagem</p>
+        <p class="subtitle">Selecione o personagem</p>
+        <mat-radio-group class="characters" formControlName="character">
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue, 'rgb(77, 146, 188)')" style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
+                <img class="nes-avatar is-large" alt="dinoBlue" [src]="dinoBlue" style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed, 'rgb(188, 77, 79)')" style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
+                <img class="nes-avatar is-large" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow, 'rgb(253, 199, 96)')" style="background: rgba(253, 199, 96, 0.5);" [value]="dinoYellow" disableRipple="true">
+                <img class="nes-avatar is-large" alt="dinoYellow" [src]="dinoYellow" style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen, 'rgb(159, 188, 77)')" style="background: rgba(159, 188, 77, 0.5);" [value]="dinoGreen" disableRipple="true">
+                <img class="nes-avatar is-large" alt="dinoGreen" [src]="dinoGreen" style="image-rendering: pixelated;">
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <img class="selected_character" [src]="selectedDino">
+    <img class="altar" src="/assets/images/altar.png">
+    <button class="nes-btn submit" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'">Confirmar</button>
+</div>

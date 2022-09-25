@@ -3,8 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {SignUpComponent} from './pages/signup/signup.component';
 import { LoginComponent } from "./pages/login/login.component";
-import { SelectCharacter } from './pages/character/select-character';
-import { SelectSkills } from './pages/character/select-skills';
+import { CharacterComponent } from './pages/character/character.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
@@ -21,12 +20,8 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'select-character',
-    component: SelectCharacter
-  },
-  {
-    path: 'select-skills',
-    component: SelectSkills
+    path: 'character',
+    component: CharacterComponent
   },
   {
     path: 'profile',

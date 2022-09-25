@@ -5,19 +5,20 @@ import { Router } from "@angular/router";
 import { NotificationsService } from "angular2-notifications";
 
 @Component({
-    selector: 'select-character',
-    templateUrl: './select-character.html',
-    styleUrls: ['./select-character.scss']
+    selector: 'character.component',
+    templateUrl: './character.component.html',
+    styleUrls: ['./character.component.scss']
 })
-export class SelectCharacter implements OnInit {
+export class CharacterComponent implements OnInit {
     characterForm!: FormGroup;
     isLoading: boolean = false;
-    dinoRed: string = "/assets/character/dinoRed.png";
-    dinoBlue: string = "/assets/character/dinoBlue.png";
-    dinoGreen: string = "/assets/character/dinoGreen.png";
-    dinoYellow: string = "/assets/character/dinoYellow.png";
+    dinoBlue: string = "/assets/character/dinoBlue.png"; // rgb(77, 146, 188)
+    dinoRed: string = "/assets/character/dinoRed.png"; // rgb(188, 77, 79)
+    dinoYellow: string = "/assets/character/dinoYellow.png"; // rba(253, 199, 96)
+    dinoGreen: string = "/assets/character/dinoGreen.png"; // rgb(159, 188, 77)
+    bgColor: string = "rgb(5,5,5)";
+    selectedDino!: string;
     user: any;
-
     selectedCharacter!: string;
 
     get f(): any { return this.characterForm.controls; }
@@ -29,26 +30,17 @@ export class SelectCharacter implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = localStorage.getItem('tempUserData');
-        this.user = JSON.parse(this.user);
         this.createFormGroup();
     }
-
+    selectCharacter(dino: string, color: string){
+        this.selectedDino = dino;
+        this.bgColor = color;
+    }
     createFormGroup(): void {
         this.characterForm = this.formBuilder.group({
             character: ['', [Validators.required]],
+            skills: [''],
         });
-    }
-    chooseSkills(){
-        const model = {
-            username: this.user.username,
-            email: this.user.email,
-            password: this.user.password,
-            character: this.characterControl.value
-        }
-
-        localStorage.setItem('tempUserData', JSON.stringify(model));
-        this.router.navigate([`/signup/select-skills`]);
     }
     
 }
