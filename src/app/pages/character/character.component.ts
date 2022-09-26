@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { AuthService } from "../../shared/auth.service";
 import { Router } from "@angular/router";
 import { NotificationsService } from "angular2-notifications";
+import { FirestoreDataService } from "src/app/shared/firestore-data.service";
 
 @Component({
     selector: 'character.component',
@@ -26,10 +27,12 @@ export class CharacterComponent implements OnInit {
     get characterControl() {
         return this.characterForm.get('character') as FormControl;
     }
-    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService) {
+    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
     }
 
     ngOnInit(): void {
+        if(!this.authService.isLoggedIn)
+            this.router.navigate(['/']);
         this.createFormGroup();
     }
     selectCharacter(dino: string, color: string){
@@ -42,5 +45,8 @@ export class CharacterComponent implements OnInit {
             skills: [''],
         });
     }
-    
+    updateUser(){
+        console.log(this.characterForm.value.skills);
+        // this.afs.addUser()
+    }
 }

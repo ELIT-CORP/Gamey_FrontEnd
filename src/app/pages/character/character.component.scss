@@ -10,6 +10,8 @@
 .form-container{
     width: 70%;
     height: 80%;
+    display: flex;
+    flex-direction: row;
     .title{
         font-size: 3rem;
         font-weight: 700;
@@ -47,36 +49,25 @@
             top: 7%;
         }
     }
-    .subtitle{
-        font-size: 1.5rem;
-        font-weight: 500;
-        transform-style: preserve-3d;
-        width: fit-content;
-        color: rgba(20, 20, 20, 1);
+    button{
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-family: "Oswald", sans-serif;
+        padding: 0 20px;
         line-height: initial;
-        &::before{
-            content: '';
-            position: absolute;
-            z-index: 0;
-            top: 0;
-            transform: translateZ(-3px) skew(20deg);
-            width: 120%;
-            left: -10%;
-            height: 100%;
-            background: rgb(250, 250, 250);
-            z-index: 9999;
-            box-shadow: inset -6px -6px rgb(230, 230, 230) !important;
-        }
     }
 }
-.characters{
+.left-50{
+    position: relative;
+    left: 50%;
+}
+.steps{
     display: flex;
+    height: fit-content;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
-    width: 40%;
-    height: fit-content;
-    padding: 10px 0;
+    padding: 1.5rem 0;
     max-width: 400px;
 }
 .select-button {
@@ -85,19 +76,25 @@
     overflow: hidden;
     opacity: 0.5;
     box-shadow: 5px 10px rgba(5, 5, 5, 0);
+    background: rgba(255, 255, 255, 0.9);
     transition: 0.5s;
+    width: fit-content;
+    
 
     &:hover {
         outline: 0 !important;
         opacity: 1;
         box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
     }
-
-    img {
-        position: relative;
-        top: 20px;
-        left: -10px;
-    }
+}
+.dinos{
+    position: relative;
+    top: 20px;
+    left: -10px;
+}
+.skill{
+    margin-left: 1rem;
+    font-weight: 500;
 }
 .mat-radio-checked{
     outline: 0 !important;
@@ -105,7 +102,24 @@
     box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
     transform: scale(1.1);
 }
-
+.mat-checkbox-checked{
+    transform: scale(1.1);
+    padding: 0 20px;
+    transform-style: preserve-3d;
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        transform: translateZ(-3px);
+        border-radius: 5px;
+        width: 110%;
+        left: -10%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        z-index: 9999;
+    }
+}
 .selected_character, .altar{
     position: absolute;
     left: 50%;
@@ -120,29 +134,55 @@
     z-index: 200 !important;
     filter: drop-shadow(0 36px 5px rgba(0, 0, 0, 0.5)) grayscale(1);
 }
-
-.submit{
-    position: absolute;
-    top: 85%;
-    right: 10%;
-    transform: translate(10px, 10px);
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-family: "Oswald", sans-serif;
-    padding: 0 20px;
+:host ::ng-deep .mat-step-header {
+    font-size: 1.5rem;
+    font-weight: 500;
+    transform-style: preserve-3d;
+    width: fit-content;
+    color: rgba(20, 20, 20, 1);
     line-height: initial;
-    color: rgba(255, 255, 255, 0.9);
-    &:hover{
-        color: rgba(255, 255, 255, 0.9);  
+    width: fit-content;
+    overflow: unset !important;
+    padding: 0.5rem 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        transform: translateZ(-3px) skew(20deg);
+        width: 120%;
+        left: -10%;
+        height: 100%;
+        background: rgb(250, 250, 250);
+        z-index: 9999;
+        box-shadow: inset -6px -6px rgb(230, 230, 230) !important;
     }
 }
 :host ::ng-deep .mat-radio-button .mat-radio-container {
     width: 0;
 }
-
 :host ::ng-deep .mat-radio-container .mat-radio-outer-circle,
 :host ::ng-deep .mat-radio-container .mat-radio-inner-circle {
     border: none;
     width: 0;
+}
+:host ::ng-deep .mat-checkbox-inner-container{
+    display: none;
+    border: none;
+    width: 0;
+}
+:host ::ng-deep .mat-checkbox-label{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.mat-stepper-vertical {
+    margin-top: 8px;
+}
+:host ::ng-deep .mat-step{
+    margin: 10px 0;
+}
+:host ::ng-deep .mat-step-icon, :host ::ng-deep .mat-step-optional{
+    display: none;
 }

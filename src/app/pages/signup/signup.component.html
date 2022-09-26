@@ -4,45 +4,43 @@
 
     <h2 class="form-title">Create a Account</h2>
 
-    <form [formGroup]="form" class="form" (ngSubmit)="register()">
-      <div class="form-control">
-        <div class="form-inputs">
-          <mat-form-field appearance="legacy">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="usernameControl.hasError('required')">Nome de usuario é necessário</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="legacy">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="emailControl.hasError('required')">Email é necessário</mat-error>
-            <mat-error *ngIf="emailControl.hasError('email')">
-              Email inválido
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="legacy">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" type="password" formControlName="password">
-            <mat-error *ngIf="passwordControl.hasError('required')">Senha é necessária</mat-error>
-            <mat-error *ngIf="passwordControl.hasError('minlength')">É necessário no mínimo 8 caracteres</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="legacy">
-            <mat-label>Confirm Password</mat-label>
-            <input matInput placeholder="Confirm Password" type="password" formControlName="conpassword">
-            <mat-error *ngIf="confirmPasswordControl.hasError('required')">Confirmação senha é necessária</mat-error>
-            <mat-error *ngIf="confirmPasswordControl.hasError('minlength')">É necessário no mínimo 8 caracteres
-            </mat-error>
-            <mat-error *ngIf="confirmPasswordControl.hasError('MustMatch')">As senhas não coincidem</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <button type="submit"
-              [disabled]="!form.valid"
-              class="form-btn"
-              mat-button>
-        <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
-        <p *ngIf="!isLoading">Next</p>
-      </button>
+    <form [formGroup]="form" class="form">
+          <div class="form-inputs">
+            <mat-form-field appearance="legacy">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Username" formControlName="username">
+              <mat-error *ngIf="usernameControl.hasError('required')">Nome de usuario é necessário</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="emailControl.hasError('required')">Email é necessário</mat-error>
+              <mat-error *ngIf="emailControl.hasError('email')">
+                Email inválido
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" type="password" formControlName="password">
+              <mat-error *ngIf="passwordControl.hasError('required')">Senha é necessária</mat-error>
+              <mat-error *ngIf="passwordControl.hasError('minlength')">É necessário no mínimo 8 caracteres</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput placeholder="Confirm Password" type="password" formControlName="conpassword">
+              <mat-error *ngIf="confirmPasswordControl.hasError('required')">Confirmação senha é necessária</mat-error>
+              <mat-error *ngIf="confirmPasswordControl.hasError('minlength')">É necessário no mínimo 8 caracteres
+              </mat-error>
+              <mat-error *ngIf="confirmPasswordControl.hasError('MustMatch')">As senhas não coincidem</mat-error>
+            </mat-form-field>
+          </div>
+          <button type="submit"
+                  [disabled]="!form.valid"
+                  class="form-btn"
+                  mat-button (click)="register()">
+            <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
+            <p *ngIf="!isLoading">Next</p>
+          </button>
     </form>
   </div>
 </div>

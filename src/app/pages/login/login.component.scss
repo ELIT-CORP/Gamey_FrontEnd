@@ -91,18 +91,16 @@
   //margin-top: 15%;
   padding: 50px 40px 35px;
 }
-
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: rgba(0,0,0,1);
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 1);
 }
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
-  color: rgba(0,0,0,1);
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgba(0, 0, 0, 1);
   font-family: 'Rubik', sans-serif;
   font-style: normal;
   font-weight: 400;
 }
-
-::ng-deep .mat-button{
+:host ::ng-deep .mat-button{
   border-radius: 0 !important;
 }
