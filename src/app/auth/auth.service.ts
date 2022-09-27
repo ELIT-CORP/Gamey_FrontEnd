@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {Router} from '@angular/router';
 import {NotificationsService} from "angular2-notifications";
 import { updateProfile } from 'firebase/auth';
+import { AnyARecord } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class AuthService {
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((userCred) => {
         this.ngZone.run(() => {
           this.router.navigate(['']);
         });
@@ -42,7 +43,8 @@ export class AuthService {
           'Sucesso',
           'Login feito com sucesso',
         )
-        return result;
+        this.SetUserData(userCred.user);
+        return userCred;
       })
       .catch((error) => {
         this.notifications.error(
@@ -63,6 +65,7 @@ export class AuthService {
           'Sucesso',
           'Cadastro feito com sucesso',
         )
+        this.SetUserData(userCred.user);
         return userCred;
       })
       .catch((error) => {
@@ -73,7 +76,9 @@ export class AuthService {
         return error.message;
       });
   }
-
+  SetUserData(user: any){
+    localStorage.setItem('user', user);
+  }
   // Send email verfificaiton when new user sign up
   // SendVerificationMail() {
   //   return this.afAuth.currentUser

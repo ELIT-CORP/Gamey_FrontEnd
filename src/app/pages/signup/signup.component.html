@@ -37,7 +37,7 @@
           <button type="submit"
                   [disabled]="!form.valid"
                   class="form-btn"
-                  mat-button (click)="register()">
+                  (click)="register()">
             <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
             <p *ngIf="!isLoading">Next</p>
           </button>

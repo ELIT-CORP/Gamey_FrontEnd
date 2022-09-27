@@ -5,11 +5,17 @@ import {SignUpComponent} from './pages/signup/signup.component';
 import { LoginComponent } from "./pages/login/login.component";
 import { CharacterComponent } from './pages/character/character.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './auth/auth-guard.service';
+import { NotFoundComponent } from './pages/NotFound/not-found.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: '404',
+    component: NotFoundComponent
   },
   {
     path: 'signup',
@@ -21,12 +27,14 @@ const routes: Routes = [
   },
   {
     path: 'character',
-    component: CharacterComponent
+    component: CharacterComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
-  }
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

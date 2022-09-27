@@ -25,6 +25,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 
 @NgModule({
@@ -58,7 +60,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     SimpleNotificationsModule.forRoot({timeOut: 3000,showProgressBar: true,pauseOnHover: true,clickToClose: false,clickIconToClose: true })
   ],
-  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}],
+  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

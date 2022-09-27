@@ -8,14 +8,36 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class FirestoreDataService {
-
   
   constructor(private _afs: AngularFirestore) {
    }
    addUser(user: User) {
     return  this._afs.collection('/User').add(user);
    }
+   
+    // this._data.getUsers().subscribe((res: any) => {
+    //   this.arr = res.map((e: any) => {
+    //     const data = e.payload.doc.data();
+    //     data.docId = e.payload.doc.id;
+    //     return data;
+    //   })
+    // }
+    // ), (err: any) => {
+    //   console.log(err);
+    // };  
    getUsers(){
-     return this._afs.collection('/Users').snapshotChanges();
+     return this._afs.collection('/User').snapshotChanges();
    }
+
+  getUserByUid(uid: string): boolean {
+    let arr = [];
+    this.getUsers().subscribe((res: any) => {
+      arr = res.map((e: any) => {
+        const data = e.payload.doc.data();
+        return data;
+      })
+      arr = arr.filter((e: any) => { return e.uid === uid })
+    })
+    return arr.length > 0
+  }
 }

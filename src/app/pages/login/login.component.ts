@@ -1,8 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../shared/auth.service";
+import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
 import {NotificationsService} from "angular2-notifications";
+import { FirestoreDataService } from "src/app/shared/firestore-data.service";
 
 @Component({
   selector: 'login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     return this.form.get('password') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
   }
 
   ngOnInit(): void {
@@ -43,18 +44,20 @@ export class LoginComponent implements OnInit {
       this.passwordControl.value,
     ).then((r: any) => {
       if (r != null) {
-        console.log(r);
         if (typeof r == 'string') {
           this.isLoading = false;
         } else {
-          this.router.navigate([`/profile`]);
+          if (!this.afs.getUserByUid(r.user.uid))
+            this.router.navigate(['/profile'])
+          else
+            this.router.navigate([`/character`]);
         }
       }
     })
   }
-
   goFoward() {
     if (this.emailControl.status === "VALID")
       this.emailValid = true;
+
   }
 }

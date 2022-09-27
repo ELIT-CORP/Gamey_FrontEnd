@@ -1,32 +1,38 @@
-<div class="bg">
-  <div style="height:100vh">
-    <nav class="nav">
-      <img [srcset]="logo" style="margin-right: 20px; max-height: 100px;"/>
-      <div style="display: flex">
-        <button class="loginBtn nes-btn is-success" (click)="goTo('login')">
-          Login
-        </button>
-        <button class="signupBtn nes-btn is-warning" (click)="goTo('signup')">
-          Sign Up
-        </button>
-      </div>
-    </nav>
-    <div class="carousel">
-      <div *ngFor="let item of items; let i=index" [ngClass]="{'item-active':selectedIndex === i}"
-           class="carousel-item changeDiv">
-        <div style="margin-left: 120px; margin-bottom: 100px" class="item">
+<div class="container">
+  <nav class="nav">
+    <img [srcset]="logo" class="logo"/>
+    <div style="display: flex;">
+      <button class="loginBtn nes-btn is-success" (click)="goTo('login')">
+        Login
+      </button>
+      <button class="signupBtn nes-btn is-warning" (click)="goTo('signup')">
+        Sign Up
+      </button>
+    </div>
+  </nav>
+  <div class="carousel">
+    <div class="keen-slider keen-slider--vertical" #sliderRef>
+      <div class="keen-slider__slide slide" *ngFor="let item of items; let i=index" [style]="'background-image: url(' + item.background + ')'">
+        <div class="item">
           <h1 style="margin: 0" class="title">{{item.title}}</h1>
           <p class="description">{{item.description}}</p>
           <button class="playBtn nes-btn is-warning">{{item.button}}</button>
         </div>
       </div>
-
     </div>
-    <div *ngIf="indicators" class="carousel-nav">
-      <div *ngFor="let dot of items; let i=index" class="dot" [ngClass]="{'active':selectedIndex === i}"
-           (click)="selectItem(i)">
-        <span class="ball" [ngClass]="{'active':selectedIndex === i}"></span>
-      </div>
-    </div>
+    <button mat-icon-button [ngClass]="'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')"
+      (click)="slider.prev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button *ngIf="slider" mat-icon-button
+      [ngClass]="'arrow arrow--right ' + (slider.track.details.slides.length - 1 === currentSlide ? 'arrow--disabled' : '')"
+      (click)="slider.next()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+  <div class="carousel-nav">
+    <button (click)="slider.moveToIdx(i)" *ngFor="let slide of dotHelper; let i = index"
+      [ngClass]="'dot ' + (i === currentSlide ? 'active' : '')">
+    </button>
   </div>
 </div>

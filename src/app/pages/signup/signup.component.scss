@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #F6F6F6;
+  // background-color: #F6F6F6;
 
   background-image: url("/assets/images/mask.png");
   background-size: contain;
@@ -64,7 +64,7 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 40%;
-  cursor: pointer;
+  cursor: url('/assets/images/cursor.png'), auto;
   background: #EFFB0E;
   display: flex;
   align-items: center;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../shared/auth.service";
+import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
 import { NotificationsService } from "angular2-notifications";
 import { FirestoreDataService } from "src/app/shared/firestore-data.service";
+import { User } from "src/app/model/user";
 
 @Component({
     selector: 'character.component',
@@ -21,6 +22,7 @@ export class CharacterComponent implements OnInit {
     selectedDino!: string;
     user: any;
     selectedCharacter!: string;
+    arr: any[] = [];
 
     get f(): any { return this.characterForm.controls; }
 
@@ -31,8 +33,8 @@ export class CharacterComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if(!this.authService.isLoggedIn)
-            this.router.navigate(['/']);
+        this.user = localStorage.getItem('user');
+        this.user = JSON.parse(this.user);
         this.createFormGroup();
     }
     selectCharacter(dino: string, color: string){
@@ -46,7 +48,14 @@ export class CharacterComponent implements OnInit {
         });
     }
     updateUser(){
-        console.log(this.characterForm.value.skills);
-        // this.afs.addUser()
+        console.log(this.user)
+        const model: User = {
+            uid: this.user.uid,
+            name: this.user.displayName,
+            email: this.user.email,
+            character: this.characterForm.value.character,
+            skills: this.characterForm.value.skills
+        }
+        this.afs.addUser(model)
     }
 }

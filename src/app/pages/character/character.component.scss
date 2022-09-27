@@ -96,6 +96,9 @@
     margin-left: 1rem;
     font-weight: 500;
 }
+.mat-stepper-vertical {
+    background-color: transparent !important;
+}
 .mat-radio-checked{
     outline: 0 !important;
     opacity: 1;
@@ -133,6 +136,9 @@
 .altar{
     z-index: 200 !important;
     filter: drop-shadow(0 36px 5px rgba(0, 0, 0, 0.5)) grayscale(1);
+}
+:host ::ng-deep .mat-stepper-vertical-line::before{
+    top: 0px !important;
 }
 :host ::ng-deep .mat-step-header {
     font-size: 1.5rem;

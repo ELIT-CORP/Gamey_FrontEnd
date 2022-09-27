@@ -1,29 +1,39 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {Router} from "@angular/router";
 import { FirestoreDataService } from 'src/app/shared/firestore-data.service';
-import { User } from 'src/app/model/user'; 
+import { User } from 'src/app/model/user';
+import KeenSlider, { KeenSliderInstance } from "keen-slider"
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+
 })
 export class HomeComponent implements OnInit {
+  @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>;
   public logo = "/assets/images/logo.png";
   public vector = "/assets/images/vector.svg";
   public items: any = [{
     title: "O Jogo",
-    description: "Avance na sua carreira de forma divertida e dinâmica! Veja as vagas disponíveis na masmorra:",
-    button: "Jogar"
+    description: "Avance na sua carreira de forma divertida e dinâmica! Veja as vagas disponíveis na masmorra",
+    button: "Jogar",
+    background: "/assets/images/mountain.png"
   }, {
     title: "Como Funciona",
     description: "Aplique para vagas e teste suas habilidades avançando de fases, de forma dinâmica e eficiente! Caso prefira, é possível trocar para um modelo tradicional de avaliação também!",
-    button: "Ver Documentação"
+    button: "Ver Documentação",
+    background: "/assets/images/ruins.png"
   },{
     title: "Contato", 
     description: "Tem alguma dúvida ou sugestão?", 
-    button: "Fale Conosco"
+    button: "Fale Conosco",
+    background: "/assets/images/florest.png"
   }];
+
+  currentSlide: number = 1
+  slider!: KeenSliderInstance;
+  dotHelper: Array<Number> = []
 
   selectedIndex = 0;
   arr: User[] = []; 
@@ -32,7 +42,7 @@ export class HomeComponent implements OnInit {
   @Input() autoSlide = true;
   @Input() slideInterval = 10000;
 
-  constructor(private router: Router, public _data: FirestoreDataService) {
+  constructor(private router: Router) {
 
   }
 
@@ -40,12 +50,6 @@ export class HomeComponent implements OnInit {
     if (this.autoSlide) {
       this.autoSlideItems();
     }
-    this._data.getUsers().subscribe(
-      (result: any) => {
-        this.arr = result;
-        console.log(this.arr);
-      }
-    );  
   }
 
   autoSlideItems():void {
@@ -68,5 +72,22 @@ export class HomeComponent implements OnInit {
 
   goTo(endpoint: string): void {
     this.router.navigate([`/${endpoint}`]);
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slider = new KeenSlider(this.sliderRef.nativeElement, {
+        initial: this.currentSlide,
+        slideChanged: (s) => {
+          this.currentSlide = s.track.details.rel
+        },
+      })
+      this.dotHelper = [
+        ...Array(this.slider.track.details.slides.length).keys(),
+      ]
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.slider) this.slider.destroy()
   }
 }
