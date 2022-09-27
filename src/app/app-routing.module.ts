@@ -7,23 +7,14 @@ import { CharacterComponent } from './pages/character/character.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { NotFoundComponent } from './pages/NotFound/not-found.component';
+import { NoAuthGuard } from './auth/no-auth-guard.service';
+import { AppModule } from './app.module';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-  },
-  {
-    path: '404',
-    component: NotFoundComponent
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'character',
@@ -31,9 +22,23 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'signup',
+    component: SignUpComponent,
+    canActivate: [NoAuthGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   },
 ];
 

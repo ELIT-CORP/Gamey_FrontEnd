@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
 import { NotificationsService } from "angular2-notifications";
 import { FirestoreDataService } from "src/app/shared/firestore-data.service";
 import { User } from "src/app/model/user";
+import { MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
     selector: 'character.component',
@@ -23,6 +24,7 @@ export class CharacterComponent implements OnInit {
     user: any;
     selectedCharacter!: string;
     arr: any[] = [];
+    setSkills = new Set<string>();
 
     get f(): any { return this.characterForm.controls; }
 
@@ -43,19 +45,28 @@ export class CharacterComponent implements OnInit {
     }
     createFormGroup(): void {
         this.characterForm = this.formBuilder.group({
-            character: ['', [Validators.required]],
-            skills: [''],
+            character: ['', [Validators.required]]
         });
     }
     updateUser(){
-        console.log(this.user)
+        this.isLoading = true;
+        if (this.afs.getUserByUid(this.user.uid))
+            this.router.navigate(['/profile']);
+
         const model: User = {
             uid: this.user.uid,
             name: this.user.displayName,
             email: this.user.email,
             character: this.characterForm.value.character,
-            skills: this.characterForm.value.skills
+            skills: Array.from(this.setSkills)
         }
+        this.isLoading = false;
         this.afs.addUser(model)
+        this.router.navigate(['/profile']);
+    }
+    toggleSkills(event: MatCheckboxChange){
+        if(event.source.checked)
+            return this.setSkills.add(event.source.value);
+        return this.setSkills.delete(event.source.value);
     }
 }

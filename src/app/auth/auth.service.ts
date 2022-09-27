@@ -43,7 +43,6 @@ export class AuthService {
           'Sucesso',
           'Login feito com sucesso',
         )
-        this.SetUserData(userCred.user);
         return userCred;
       })
       .catch((error) => {
@@ -65,7 +64,6 @@ export class AuthService {
           'Sucesso',
           'Cadastro feito com sucesso',
         )
-        this.SetUserData(userCred.user);
         return userCred;
       })
       .catch((error) => {
@@ -75,9 +73,6 @@ export class AuthService {
         )
         return error.message;
       });
-  }
-  SetUserData(user: any){
-    localStorage.setItem('user', user);
   }
   // Send email verfificaiton when new user sign up
   // SendVerificationMail() {
@@ -103,9 +98,16 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null ? true : false;
   }
 
+  errorMessage(message: string){
+    this.router.navigate(['/login']);
+    this.notifications.error(
+      'Erro',
+      message,
+    )
+  }
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {

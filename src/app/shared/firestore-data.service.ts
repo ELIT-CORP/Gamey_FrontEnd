@@ -11,23 +11,13 @@ export class FirestoreDataService {
   
   constructor(private _afs: AngularFirestore) {
    }
-   addUser(user: User) {
-    return  this._afs.collection('/User').add(user);
-   }
    
-    // this._data.getUsers().subscribe((res: any) => {
-    //   this.arr = res.map((e: any) => {
-    //     const data = e.payload.doc.data();
-    //     data.docId = e.payload.doc.id;
-    //     return data;
-    //   })
-    // }
-    // ), (err: any) => {
-    //   console.log(err);
-    // };  
-   getUsers(){
-     return this._afs.collection('/User').snapshotChanges();
-   }
+  addUser(user: User) {
+   return  this._afs.collection('/User').add(user);
+  }
+  getUsers(){
+    return this._afs.collection('/User').snapshotChanges();
+  }
 
   getUserByUid(uid: string): boolean {
     let arr = [];
