@@ -7,20 +7,17 @@ import { userInfo } from "os";
 
 
 @Component({
-    selector: 'profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss']
+    selector: 'job-list',
+    templateUrl: './job-list.component.html',
+    styleUrls: ['./job-list.component.scss']
 })
-export class ProfileComponent implements OnInit {
-
-    selectedDino: string = "/assets/character/dinoBlue.png";
-    userInfo: any;
+export class JobList implements OnInit {
 
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService) {
     }
 
     ngOnInit(): void {
-        
+
     }
 
     goTo(endpoint: string): void {

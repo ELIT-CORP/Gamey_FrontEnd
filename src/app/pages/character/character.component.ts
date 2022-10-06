@@ -50,8 +50,7 @@ export class CharacterComponent implements OnInit {
     }
     updateUser(){
         this.isLoading = true;
-        if (this.afs.getUserByUid(this.user.uid))
-            this.router.navigate(['/profile']);
+            // this.router.navigate(['/profile']);
 
         const model: User = {
             uid: this.user.uid,

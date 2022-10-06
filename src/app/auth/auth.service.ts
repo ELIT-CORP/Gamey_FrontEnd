@@ -36,9 +36,6 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((userCred) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
-        });
         this.notifications.success(
           'Sucesso',
           'Login feito com sucesso',

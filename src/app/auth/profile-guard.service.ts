@@ -6,26 +6,23 @@ import { FirestoreDataService } from '../shared/firestore-data.service';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class ProfileGuard implements CanActivate {
     user: any;
-    constructor(private auth: AuthService, private route: Router, private afs: FirestoreDataService) {}
+    constructor(private auth: AuthService, private route: Router, private afs: FirestoreDataService) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> | boolean {
-        return this.checkUserLoging();
-    }
-    canActivateChild(
-        next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.canActivate(next, state);
-    }
-    checkUserLoging(): boolean{
         if (this.auth.isLoggedIn) {
+            this.checkHasCharacter();
             return true;
         }
         this.route.navigate(['']);
+        return false;
+    }
+
+    checkHasCharacter() {
         return false;
     }
 }

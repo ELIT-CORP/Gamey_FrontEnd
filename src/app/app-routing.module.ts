@@ -9,6 +9,8 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { NotFoundComponent } from './pages/NotFound/not-found.component';
 import { NoAuthGuard } from './auth/no-auth-guard.service';
 import { AppModule } from './app.module';
+import { ProfileGuard } from './auth/profile-guard.service';
+import { JobList } from './pages/job/job-list.component';
 
 const routes: Routes = [
   {
@@ -17,9 +19,9 @@ const routes: Routes = [
     canActivate: [NoAuthGuard],
   },
   {
-    path: 'character',
-    component: CharacterComponent,
-    canActivate: [AuthGuard]
+    path: 'signup',
+    component: SignUpComponent,
+    canActivate: [NoAuthGuard],
   },
   {
     path: 'login',
@@ -29,12 +31,17 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [ProfileGuard]
   },
   {
-    path: 'signup',
-    component: SignUpComponent,
-    canActivate: [NoAuthGuard],
+    path: 'character',
+    component: CharacterComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'job',
+    component: JobList,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

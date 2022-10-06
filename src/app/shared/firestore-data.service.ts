@@ -18,16 +18,8 @@ export class FirestoreDataService {
   getUsers(){
     return this._afs.collection('/User').snapshotChanges();
   }
-
-  getUserByUid(uid: string): boolean {
-    let arr = [];
-    this.getUsers().subscribe((res: any) => {
-      arr = res.map((e: any) => {
-        const data = e.payload.doc.data();
-        return data;
-      })
-      arr = arr.filter((e: any) => { return e.uid === uid })
-    })
-    return arr.length > 0
-  }
+  
+  // getUserByUid(uid: string) {
+  //    console.log(this._afs.collection('/User').);
+  // }
 }

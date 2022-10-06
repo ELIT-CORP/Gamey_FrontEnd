@@ -30,6 +30,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 
 import { environment } from "../environments/environment";
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileGuard } from './auth/profile-guard.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { LoginComponent } from './pages/login/login.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SimpleNotificationsModule.forRoot({timeOut: 3000,showProgressBar: true,pauseOnHover: true,clickToClose: false,clickIconToClose: true })
   ],
-  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, AuthService, AuthGuard, NoAuthGuard],
+  providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, AuthService, AuthGuard, NoAuthGuard, ProfileGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
