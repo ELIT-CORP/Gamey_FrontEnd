@@ -26,4 +26,7 @@ export class ProfileComponent implements OnInit {
     goTo(endpoint: string): void {
         this.router.navigate([`/${endpoint}`]);
     }
+    signOut(): void {
+        this.authService.SignOut();
+    }
 }
