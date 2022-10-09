@@ -8,39 +8,49 @@
         </div>
     </nav>
     <div class="body-profile">
-        <div class="nes-container" style="width: 60%; background-color: rgba(255, 255, 255, 0.3); margin: 10px auto;">
-            <div class="profile">  
-                <div class="img-container">
-                    <img class="" src="{{selectedDino}}" />
-                </div>
-                <div class="infos">
-                    <p class="username">Sones</p>
-                    <p class="current-level">Nivel 2</p>
-                    <div class="level">
-                        <p class="exp">xp: 500/600</p>
-                        <progress class="nes-progress is-primary experience" value="80" max="100"></progress>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-container nes-container">
-            <div class="nes-badge" mat-tab-label>
-                <span class="is-dark">Habilidades</span>
-            </div>
-            <section class="message-list" style="margin: 10px 0 0 20px">
-                <section class="message ">
-                    <div class="nes-balloon from-left">
-                        <p>Conquistado habilidade de Java Iniciante.</p>
-                        <img src="/assets/character/Hard/sword.png" class="nes-avatar is-medium"/>
-                    </div>
-                </section>
-                <section class="message">
-                    <div class="nes-balloon from-left">
-                        <p>Conquistado habilidade de Java Intermediário.</p>
-                        <img src="/assets/character/Hard/dagger.png" class="nes-avatar is-medium"/>
-                    </div>
-                </section>
-            </section>
-        </div>
+        <section class="info">
+            <p class="nes-badge" style="margin-bottom: 2rem">
+                <span class="name is-dark">{{user.name}}</span>
+                <button mat-icon-button (click)="setEditable()" *ngIf="!editable" style="background-color: rgb(52, 121, 0);">
+                    <mat-icon class="nes-icon is-small">edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="setEditable()" *ngIf="editable" style="background-color: rgb(150, 4, 4);">
+                    <mat-icon class="nes-icon is-small">close</mat-icon>
+                </button>
+            <p>{{user.trait}}</p>
+            <img [src]="user.character">
+        </section>
+        <section class="skills" *ngIf="!editable">
+            <h2 style="font-size: 1.8rem">Habilidades desbloqueadas:</h2>
+            <article *ngFor="let skill of user.skills">
+                <img src="/assets/character/Hard/{{skill}}.png"/>
+                <p>{{skill}}</p>
+            </article>
+        </section>
+        <form class="profile-edit" *ngIf="editable" [formGroup]="form" >
+            <mat-form-field appearance="outline" style="z-index: 1000; min-width: 320px">
+                <mat-label>Nome de Usuario</mat-label>
+                <input matInput formControlName="name" style="z-index: 1000">
+            </mat-form-field>
+            <mat-radio-group class="steps" formControlName="character" style="width: auto;">
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue, 'rgb(77, 146, 188)')"
+                    style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
+                    <img class="nes-avatar is-large dinos" alt="dinoBlue" [src]="dinoBlue" style="image-rendering: pixelated;">
+                </mat-radio-button>
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed, 'rgb(188, 77, 79)')"
+                    style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
+                    <img class="nes-avatar is-large dinos" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
+                </mat-radio-button>
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow, 'rgb(253, 199, 96)')"
+                    style="background: rgba(253, 199, 96, 0.5);" [value]="dinoYellow" disableRipple="true">
+                    <img class="nes-avatar is-large dinos" alt="dinoYellow" [src]="dinoYellow" style="image-rendering: pixelated;">
+                </mat-radio-button>
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen, 'rgb(159, 188, 77)')"
+                    style="background: rgba(159, 188, 77, 0.5);" [value]="dinoGreen" disableRipple="true">
+                    <img class="nes-avatar is-large dinos" alt="dinoGreen" [src]="dinoGreen" style="image-rendering: pixelated;">
+                </mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button color="success">Salvar</button>
+        </form>
     </div>
 </div>

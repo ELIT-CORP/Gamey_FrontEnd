@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { db } from 'src/environments/firebase';
-import { doc, setDoc, QuerySnapshot } from "firebase/firestore"; 
+import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore"; 
 import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreDataService {
+
+  db = getFirestore();
 
   constructor(private _afs: AngularFirestore) {
    }
@@ -17,16 +19,28 @@ export class FirestoreDataService {
       name: user.name,
       email: user.email,
       character: user.character,
-      skills: user.skills
+      skills: user.skills,
+      level: 1,
+      experience: 0,
+      trait: user.trait
     });
   }
   getUsers(){
-    return this._afs.collection('/User').snapshotChanges();
+    this._afs.collection('/User').snapshotChanges();
   }
-  getUserByUid(user: any): boolean {
-    this._afs.collection('/User').doc(user.uid).ref.get().then((doc) =>{
+
+  userHasProfile(user: any): any {
+    this._afs.collection('/User').doc(user.uid).ref.get().then((doc) => {
       return doc.exists;
+    }, e => {
+      return null;
     });
-    return false;
+  }
+
+  getUserByUid() {
+    let loggedUser = JSON.parse(localStorage.getItem('user')!);
+    this._afs.collection('/User').doc(loggedUser.uid).ref.get().then((doc) => {
+      localStorage.setItem('userData', JSON.stringify(doc.data()));
+    });
   }
 }

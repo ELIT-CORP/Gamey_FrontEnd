@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.SignIn(this.emailControl.value, this.passwordControl.value).then((r: any) => {
       if (r != null && typeof r != 'string') {
+          this.afs.getUserByUid();
           this.router.navigate(['/profile'])
       }
       this.isLoading = false;

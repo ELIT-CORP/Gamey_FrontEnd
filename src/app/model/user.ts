@@ -4,4 +4,7 @@ export interface User{
     email: string;
     character: string;
     skills: any[];
+    level?: number;
+    experience?: number;
+    trait?: string;
 }
