@@ -68,7 +68,7 @@ export class SignUpComponent implements OnInit {
   }
 
   register(){
-    this.authService.SignUp(this.usernameControl.value, this.emailControl.value, this.passwordControl.value).then((res) => {
+    this.authService.SignUp(this.usernameControl.value, this.emailControl.value, this.passwordControl.value).then(() => {
       this.router.navigate(['/character']);
     });
   }
