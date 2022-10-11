@@ -150,4 +150,12 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+
+  async updateProfileUrl(photoURL: any) {
+    await updateProfile(this.userData, { photoURL: photoURL })
+  }
+
+  async updateDisplayName(displayName: any) {
+    await updateProfile(this.userData, { displayName: displayName })
+  }
 }

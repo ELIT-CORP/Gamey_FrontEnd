@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { db } from 'src/environments/firebase';
 import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore"; 
 import { User } from '../model/user';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,40 +12,40 @@ export class FirestoreDataService {
 
   db = getFirestore();
 
-  constructor(private _afs: AngularFirestore) {
+  constructor(private _afs: AngularFirestore, private authService: AuthService) {
    }
    
-   addUser(user: User) {
-    return  this._afs.collection('/User').doc(user.uid).set({
-       name: user.name,
-       email: user.email,
-       character: user.character,
-       skills: user.skills,
-       level: 1,
-        experience: 0,
-        trait: user.trait
+  async addUser(user: User) {
+    await this.authService.updateProfileUrl(user.character)
+    await this._afs.collection('/user_skills').doc(user.uid).set({
+      skills: user.skills,
+      trait: user.trait
      });
    }
+
    getUsers(){
-     return this._afs.collection('/User').snapshotChanges();
+     return this._afs.collection('/user_skills').snapshotChanges();
    }
  
    async userHasProfile(user: any) : Promise<boolean> {
-    debugger
-    const userRef = await this._afs.collection('User').doc(user.uid).ref.get();
-
-    console.log(userRef.exists);
+     const userRef = await this._afs.collection('/user_skills').doc(user.uid).ref.get();
       if(userRef.exists){
         return true;
       } else {
         return false;
       }
     };  
- 
-   getUserByUid(uid: string): any {
-     this._afs.collection('/User').doc(uid).ref.get().then((doc) => {
-       return doc
-     });
-     return null;
-   }
+
+  async getUserByUid() {
+    let loggedUser = this.authService.isLoggedIn();
+    const doc = await this._afs.collection('/user_skills').doc(loggedUser.uid).ref.get()
+    localStorage.setItem('userData', JSON.stringify(doc.data()));
+  }
+
+  // updateCharacter(username: any, character: any, userId: any){
+
+  //   this._afs.collection('user_skills').doc(userId).ref.get().then((doc) => {
+  //     localStorage.setItem('userData', JSON.stringify(doc.data()));
+  //   });
+  // }
 }

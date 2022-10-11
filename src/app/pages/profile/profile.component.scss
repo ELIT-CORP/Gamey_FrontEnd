@@ -68,12 +68,41 @@
     flex-direction: column;
     padding: 0 1rem;
     z-index: 9999;
-    .name{
+    .text{
         text-transform: capitalize;
         font-weight: 600;
         font-size: 1.2rem;
         line-height: initial;
         color:rgba(250, 250, 250, 1);
+    }
+    .name{
+        position: relative;
+        margin: 1rem 0;
+        padding: 0.5rem 3.8rem;
+        background-color: rgb(33, 37, 30);
+        z-index: 999;
+        &:after, &:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: rgb(33, 37, 30);
+            z-index: -1;
+        }
+        &:after{
+            transform: translate(5px, -5px);
+        }
+        &:before{
+            transform: translate(-5px, 5px);
+        }
+        button{
+            position: absolute;
+            right: -10%;
+            top: -50%;
+            color: #F6F6F6;
+        }
     }
 }
 .skills{

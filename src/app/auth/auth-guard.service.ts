@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> | boolean | Promise<boolean>{
-        debugger
         const user = this.checkUserLoging()
         if(typeof user !== 'boolean') {
             return this.checkUserCharacter(user)
@@ -35,9 +34,7 @@ export class AuthGuard implements CanActivate {
     }
 
     checkUserLoging(): any {
-        debugger
         const user = this.auth.isLoggedIn();
-        console.log(user)
         if (user != null) {
             return user;
         }         
@@ -46,8 +43,6 @@ export class AuthGuard implements CanActivate {
     }
 
     async checkUserCharacter(user: any) : Promise<boolean> {
-        debugger
-        console.log(user)
         if (await this.afs.userHasProfile(user) == false) {
             this.route.navigate(['/**']);
             return false;

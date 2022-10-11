@@ -9,20 +9,21 @@
     </nav>
     <div class="body-profile">
         <section class="info">
-            <p class="nes-badge" style="margin-bottom: 2rem">
-                <span class="name is-dark">{{user.name}}</span>
+            <img [src]="loggedUser.photoURL">
+            <div class="name">
+                <span class="text">{{loggedUser.displayName}}</span>
                 <button mat-icon-button (click)="setEditable()" *ngIf="!editable" style="background-color: rgb(52, 121, 0);">
                     <mat-icon class="nes-icon is-small">edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="setEditable()" *ngIf="editable" style="background-color: rgb(150, 4, 4);">
                     <mat-icon class="nes-icon is-small">close</mat-icon>
                 </button>
-            <p>{{user.trait}}</p>
-            <img [src]="user.character">
+            </div>
+            <p class="text">{{userSkills.trait}}</p>
         </section>
         <section class="skills" *ngIf="!editable">
             <h2 style="font-size: 1.8rem">Habilidades desbloqueadas:</h2>
-            <article *ngFor="let skill of user.skills">
+            <article *ngFor="let skill of userSkills.skills">
                 <img src="/assets/character/Hard/{{skill}}.png"/>
                 <p>{{skill}}</p>
             </article>
@@ -50,7 +51,7 @@
                     <img class="nes-avatar is-large dinos" alt="dinoGreen" [src]="dinoGreen" style="image-rendering: pixelated;">
                 </mat-radio-button>
             </mat-radio-group>
-            <button mat-raised-button color="success">Salvar</button>
+            <button mat-raised-button color="success" (click)="updateUser()">Salvar</button>
         </form>
     </div>
 </div>

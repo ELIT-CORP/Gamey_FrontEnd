@@ -6,6 +6,7 @@ import { NotificationsService } from "angular2-notifications";
 import { FirestoreDataService } from "src/app/shared/firestore-data.service";
 import { appendFile } from "fs";
 import { User } from "src/app/model/user";
+import { log } from "console";
 
 
 @Component({
@@ -17,21 +18,24 @@ export class ProfileComponent implements OnInit {
 
     selectedDino: string = "/assets/character/dinoBlue.png";
     userInfo: any;
-    user: User | any = [];
+    userSkills: any = [];
     editable: boolean = false;
     dinoBlue: string = "/assets/character/dinoBlue.png"; // rgb(77, 146, 188)
     dinoRed: string = "/assets/character/dinoRed.png"; // rgb(188, 77, 79)
     dinoYellow: string = "/assets/character/dinoYellow.png"; // rba(253, 199, 96)
     dinoGreen: string = "/assets/character/dinoGreen.png"; // rgb(159, 188, 77)
     form!: FormGroup;
-    
+    isLoading: boolean = false;
+    loggedUser: any;
+
+    get f(): any { return this.form.controls; }
+
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
     }
 
     ngOnInit(): void {
-        this.user = JSON.parse(localStorage.getItem('userData')!);
-        console.log(JSON.parse(localStorage.getItem('userData')!));
-        console.log(this.user.skills[0])
+        this.userSkills = JSON.parse(localStorage.getItem('userData')!);
+        this.loggedUser = this.authService.isLoggedIn();
         this.createFormGroup();
     }
 
@@ -53,5 +57,18 @@ export class ProfileComponent implements OnInit {
 
     selectCharacter(dino: string, color: string) {
         this.selectedDino = dino;
+    }
+    updateUser(){
+        this.isLoading = true;
+        let displayName = this.f.name.value;
+        // const auth = getAuth();
+        // console.log(auth)
+        // if (auth.currentUser){
+        //     updateProfile(auth.currentUser, { displayName })
+        //     this.afs.updateCharacter(displayName, this.f.character.value, auth.currentUser.uid);
+        //     this.user = JSON.parse(localStorage.getItem('userData')!);
+        //     this.isLoading = false;
+        // }
+        // this.isLoading = false;
     }
 }

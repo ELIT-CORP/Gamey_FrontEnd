@@ -35,8 +35,7 @@ export class CharacterComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = localStorage.getItem('user');
-        this.user = JSON.parse(this.user);
+        this.user = this.authService.isLoggedIn();
         this.createFormGroup();
     }
     selectCharacter(dino: string, color: string){
@@ -54,10 +53,9 @@ export class CharacterComponent implements OnInit {
 
         const model: User = {
             uid: this.user.uid,
-            name: this.user.displayName,
-            email: this.user.email,
             character: this.characterForm.value.character,
-            skills: Array.from(this.setSkills)
+            skills: Array.from(this.setSkills),
+            trait: 'carismático'
         }
         this.isLoading = false;
         this.afs.addUser(model)
