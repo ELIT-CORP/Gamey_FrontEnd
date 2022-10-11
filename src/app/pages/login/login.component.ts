@@ -23,7 +23,10 @@ export class LoginComponent implements OnInit {
     return this.form.get('password') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
+  // constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
+  // }
+
+  constructor(private formBuilder: FormBuilder, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -39,13 +42,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.isLoading = true;
-    this.authService.SignIn(this.emailControl.value, this.passwordControl.value).then((r: any) => {
-      if (r != null && typeof r != 'string') {
-          this.router.navigate(['/profile'])
-      }
-      this.isLoading = false;
-    })
+    this.authService.SignIn(this.emailControl.value, this.passwordControl.value);
+    this.isLoading = false;
   }
+
   goFoward() {
     if (this.emailControl.status === "VALID")
       this.emailValid = true;

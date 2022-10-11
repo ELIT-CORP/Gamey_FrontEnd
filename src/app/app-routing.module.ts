@@ -10,6 +10,7 @@ import { NotFoundComponent } from './pages/NotFound/not-found.component';
 import { NoAuthGuard } from './auth/no-auth-guard.service';
 import { AppModule } from './app.module';
 import { JobList } from './pages/job/job-list.component';
+import { AuthGuardCharacter } from './auth/auth-guard-character.service';
 
 const routes: Routes = [
   {
@@ -35,7 +36,7 @@ const routes: Routes = [
   {
     path: 'character',
     component: CharacterComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardCharacter],
   },
   {
     path: 'job',

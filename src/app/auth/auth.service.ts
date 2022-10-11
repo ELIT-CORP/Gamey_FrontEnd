@@ -1,8 +1,8 @@
-import {Injectable, NgZone} from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as auth from 'firebase/auth';
-import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {Router} from '@angular/router';
-import {NotificationsService} from "angular2-notifications";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { NotificationsService } from "angular2-notifications";
 import { updateProfile } from 'firebase/auth';
 import { AnyARecord } from 'dns';
 
@@ -32,23 +32,35 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  SignIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCred) => {
-        this.notifications.success(
-          'Sucesso',
-          'Login feito com sucesso',
-        )
-        return userCred;
-      })
-      .catch((error) => {
-        this.notifications.error(
-          'Erro',
-          error.message,
-        )
-        return error.message;
-      });
+  async SignIn(email: string, password: string) {
+    try {
+      return this.afAuth
+        .signInWithEmailAndPassword(email, password)
+        .then((userCred) => {
+          this.userData = userCred.user;
+          this.notifications.success(
+            'Sucesso',
+            'Login feito com sucesso',
+          )
+          this.afAuth.authState.subscribe((user) => {
+            if (user) {
+              this.router.navigate(['/character']);
+            }
+          });
+        }).catch((error) => {
+          this.notifications.error(
+            'Erro ao logar',
+            'Email e/ou senha invalido');
+          console.error(error.message);
+          // this.router.navigate([''])
+        });
+    } catch (error: any) {
+      this.notifications.error(
+        'Erro',
+        error.message,
+      )
+      return error.message;;
+    }
   }
 
   // Sign up with email/password
@@ -56,11 +68,12 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((userCred: any) => {
-        updateProfile(userCred.user, {displayName})
+        updateProfile(userCred.user, { displayName })
         this.notifications.success(
           'Sucesso',
           'Cadastro feito com sucesso',
         )
+        console.log(userCred)
         return userCred;
       })
       .catch((error) => {
@@ -93,12 +106,14 @@ export class AuthService {
   }
 
   // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
+  isLoggedIn(): any {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null ? true : false;
+    // console.log(user)
+    return user
+    // return user !== null ? true : false;
   }
 
-  errorMessage(message: string){
+  errorMessage(message: string) {
     this.router.navigate(['/login']);
     this.notifications.error(
       'Erro',
