@@ -27,9 +27,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/signup/signup.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TrainingComponent } from './pages/training/training.component';
 
 import { environment } from "../environments/environment";
-import { LoginComponent } from './pages/login/login.component';
 import {JobModal} from "./pages/job/job.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {JobAddModal} from "./pages/job/job-add.component";
@@ -47,6 +48,7 @@ import {JobList} from "./pages/job/job-list.component";
     JobModal,
     JobAddModal,
     JobList
+    TrainingComponent,
   ],
   imports: [
     BrowserModule,

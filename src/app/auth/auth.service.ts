@@ -68,11 +68,13 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((userCred: any) => {
+        this.userData = userCred.user;
         updateProfile(userCred.user, { displayName })
         this.notifications.success(
           'Sucesso',
           'Cadastro feito com sucesso',
         )
+        this.router.navigate(['/character']);
         return userCred;
       })
       .catch((error) => {

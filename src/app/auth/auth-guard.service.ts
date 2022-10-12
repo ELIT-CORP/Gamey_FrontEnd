@@ -44,7 +44,7 @@ export class AuthGuard implements CanActivate {
 
     async checkUserCharacter(user: any) : Promise<boolean> {
         if (await this.afs.userHasProfile(user) == false) {
-            this.route.navigate(['/**']);
+            this.route.navigate(['/character']);
             return false;
         }
         return true;       
