@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -164,6 +164,14 @@ table {
 
   &::after {
     box-shadow: inset -4px -4px hsl(63, 57%, 52%) !important;
+  }
+}
+
+.card {
+  background: rgb(206, 193, 173) !important;
+
+  &::after {
+    box-shadow: inset -4px -4px rgb(172, 152, 116) !important;
   }
 }
 .mat-success {

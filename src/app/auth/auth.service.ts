@@ -73,7 +73,6 @@ export class AuthService {
           'Sucesso',
           'Cadastro feito com sucesso',
         )
-        console.log(userCred)
         return userCred;
       })
       .catch((error) => {

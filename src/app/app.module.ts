@@ -30,6 +30,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
 
 import { environment } from "../environments/environment";
 import { LoginComponent } from './pages/login/login.component';
+import {JobModal} from "./pages/job/job.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {JobAddModal} from "./pages/job/job-add.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { LoginComponent } from './pages/login/login.component';
     CharacterComponent,
     ProfileComponent,
     LoginComponent,
+    JobModal,
+    JobAddModal
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,7 @@ import { LoginComponent } from './pages/login/login.component';
     MatIconModule,
     MatStepperModule,
     MatButtonModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SimpleNotificationsModule.forRoot({timeOut: 3000,showProgressBar: true,pauseOnHover: true,clickToClose: false,clickIconToClose: true })
   ],
