@@ -31,4 +31,8 @@ export class TrainingComponent implements OnInit {
     goTo(endpoint: string): void {
         this.router.navigate([`/${endpoint}`]);
     }
+    startCourse(course: Course): void {
+        let name =  course.name.replace(/\s/g, '-');
+        this.router.navigate([`/training/${name}`]);
+    }
 }

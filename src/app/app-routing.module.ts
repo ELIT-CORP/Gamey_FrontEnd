@@ -12,6 +12,7 @@ import { AppModule } from './app.module';
 import { JobList } from './pages/job/job-list.component';
 import { AuthGuardCharacter } from './auth/auth-guard-character.service';
 import { TrainingComponent } from './pages/training/training.component';
+import { StartTrainingComponent } from './pages/training/start-training.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'training',
     component: TrainingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'training/:id',
+    component: StartTrainingComponent,
     canActivate: [AuthGuard]
   },
   {

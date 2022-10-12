@@ -9,10 +9,12 @@
     <div class="content">
         <div class="courses">
             <div class="course" *ngFor="let c of courses">
-                <p>{{c.name}}</p>
-                <p>{{c.description}}</p>
-                <img [src]="c.url">
-                <button>treinar</button>
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <img [src]="c.url"/>
+                    <p class="title">{{c.name}}</p>
+                </div>
+                <p class="description">{{c.description}}</p>
+                <button class="nes-btn" (click)="startCourse(c)">Iniciar</button>
             </div>
         </div>
     </div>
