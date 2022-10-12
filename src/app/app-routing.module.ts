@@ -11,6 +11,7 @@ import { NoAuthGuard } from './auth/no-auth-guard.service';
 import { AppModule } from './app.module';
 import { JobList } from './pages/job/job-list.component';
 import { AuthGuardCharacter } from './auth/auth-guard-character.service';
+import { TrainingComponent } from './pages/training/training.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'training',
+    component: TrainingComponent,
     canActivate: [AuthGuard]
   },
   {
