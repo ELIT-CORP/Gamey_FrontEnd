@@ -33,7 +33,8 @@ export class ProfileComponent implements OnInit {
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        await this.afs.getUserByUid();
         this.userSkills = JSON.parse(localStorage.getItem('userData')!);
         this.loggedUser = this.authService.isLoggedIn();
         this.createFormGroup();
@@ -55,7 +56,7 @@ export class ProfileComponent implements OnInit {
         this.editable = !this.editable;
     }
 
-    selectCharacter(dino: string, color: string) {
+    selectCharacter(dino: string) {
         this.selectedDino = dino;
     }
     updateUser(){

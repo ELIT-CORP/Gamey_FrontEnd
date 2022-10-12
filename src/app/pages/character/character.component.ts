@@ -47,7 +47,7 @@ export class CharacterComponent implements OnInit {
             character: ['', [Validators.required]]
         });
     }
-    updateUser(){
+    async updateUser(){
         this.isLoading = true;
             // this.router.navigate(['/profile']);
 
@@ -58,7 +58,7 @@ export class CharacterComponent implements OnInit {
             trait: 'carismático'
         }
         this.isLoading = false;
-        this.afs.addUser(model)
+        await this.afs.addUser(model)
         this.router.navigate(['/profile']);
     }
     toggleSkills(event: MatCheckboxChange){
