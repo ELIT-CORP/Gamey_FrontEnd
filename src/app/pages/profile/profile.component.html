@@ -12,10 +12,10 @@
             <img [src]="loggedUser.photoURL">
             <div class="name">
                 <span class="text">{{loggedUser.displayName}}</span>
-                <button mat-icon-button (click)="setEditable()" *ngIf="!editable" style="background-color: rgb(52, 121, 0);">
+                <button mat-icon-button (click)="setEditable()" *ngIf="!editable">
                     <mat-icon class="nes-icon is-small">edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="setEditable()" *ngIf="editable" style="background-color: rgb(150, 4, 4);">
+                <button mat-icon-button (click)="setEditable()" *ngIf="editable">
                     <mat-icon class="nes-icon is-small">close</mat-icon>
                 </button>
             </div>
@@ -35,11 +35,11 @@
             </mat-form-field>
             <mat-radio-group class="steps" formControlName="character" style="width: auto;">
                 <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue)"
-                    [value]="dinoBlue" disableRipple="true">
+                    style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoBlue" [src]="dinoBlue" style="image-rendering: pixelated;">
                 </mat-radio-button>
                 <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed)"
-                    [value]="dinoRed" disableRipple="true">
+                    style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
                 </mat-radio-button>
                 <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow)"
