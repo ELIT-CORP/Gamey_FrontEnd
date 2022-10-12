@@ -35,9 +35,9 @@ export class AuthGuardCharacter implements CanActivate {
         const user = this.auth.isLoggedIn();
         if (user != null) {
             return user;
-        }         
+        }
         this.route.navigate(['']);
-        return false;       
+        return false;
     }
 
     async checkUserCharacter(user: any) : Promise<boolean> {
@@ -46,6 +46,6 @@ export class AuthGuardCharacter implements CanActivate {
         }
         this.afs.getUserByUid();
         this.route.navigate(['/profile']);
-        return false;        
+        return false;
     }
 }

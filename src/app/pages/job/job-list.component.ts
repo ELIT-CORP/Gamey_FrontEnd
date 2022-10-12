@@ -28,6 +28,7 @@ export class JobList implements OnInit {
   async ngOnInit() {
     await this.firestoreDataService.getJobs().subscribe(jobs => {
       this.jobs = jobs
+      console.log(this.jobs)
     });
   }
 

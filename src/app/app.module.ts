@@ -47,7 +47,7 @@ import {JobList} from "./pages/job/job-list.component";
     LoginComponent,
     JobModal,
     JobAddModal,
-    JobList
+    JobList,
     TrainingComponent,
   ],
   imports: [

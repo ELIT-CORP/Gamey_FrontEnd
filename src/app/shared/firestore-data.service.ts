@@ -5,14 +5,8 @@ import {User} from '../model/user';
 import {AuthService} from '../auth/auth.service';
 import {first, map, Observable} from "rxjs";
 import {Job} from "../model/job";
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { db } from 'src/environments/firebase';
-import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore";
-import { User } from '../model/user';
-import { AuthService } from '../auth/auth.service';
 import { Course } from '../model/course';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
