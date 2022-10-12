@@ -34,19 +34,19 @@
                 <input matInput formControlName="name" style="z-index: 1000">
             </mat-form-field>
             <mat-radio-group class="steps" formControlName="character" style="width: auto;">
-                <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue, 'rgb(77, 146, 188)')"
-                    style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue)"
+                    [value]="dinoBlue" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoBlue" [src]="dinoBlue" style="image-rendering: pixelated;">
                 </mat-radio-button>
-                <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed, 'rgb(188, 77, 79)')"
-                    style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed)"
+                    [value]="dinoRed" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
                 </mat-radio-button>
-                <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow, 'rgb(253, 199, 96)')"
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow)"
                     style="background: rgba(253, 199, 96, 0.5);" [value]="dinoYellow" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoYellow" [src]="dinoYellow" style="image-rendering: pixelated;">
                 </mat-radio-button>
-                <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen, 'rgb(159, 188, 77)')"
+                <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen)"
                     style="background: rgba(159, 188, 77, 0.5);" [value]="dinoGreen" disableRipple="true">
                     <img class="nes-avatar is-large dinos" alt="dinoGreen" [src]="dinoGreen" style="image-rendering: pixelated;">
                 </mat-radio-button>

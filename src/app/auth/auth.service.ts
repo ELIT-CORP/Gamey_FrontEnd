@@ -73,7 +73,6 @@ export class AuthService {
           'Sucesso',
           'Cadastro feito com sucesso',
         )
-        console.log(userCred)
         return userCred;
       })
       .catch((error) => {
@@ -147,6 +146,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('userData');
       this.router.navigate(['login']);
     });
   }
