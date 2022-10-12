@@ -107,9 +107,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   isLoggedIn(): any {
     const user = JSON.parse(localStorage.getItem('user')!);
-    // console.log(user)
     return user
-    // return user !== null ? true : false;
   }
 
   errorMessage(message: string) {
@@ -157,5 +155,12 @@ export class AuthService {
 
   async updateDisplayName(displayName: any) {
     await updateProfile(this.userData, { displayName: displayName })
+  }
+
+  async updateUser(displayName: any, photoURL: any){
+    if(displayName)
+      this.updateDisplayName(displayName)
+    if(photoURL)
+      this.updateProfileUrl(photoURL)
   }
 }

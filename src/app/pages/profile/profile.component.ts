@@ -19,14 +19,13 @@ export class ProfileComponent implements OnInit {
     selectedDino: string = "/assets/character/dinoBlue.png";
     userInfo: any;
     userSkills: any = [];
+    loggedUser: any;
     editable: boolean = false;
     dinoBlue: string = "/assets/character/dinoBlue.png"; // rgb(77, 146, 188)
     dinoRed: string = "/assets/character/dinoRed.png"; // rgb(188, 77, 79)
     dinoYellow: string = "/assets/character/dinoYellow.png"; // rba(253, 199, 96)
     dinoGreen: string = "/assets/character/dinoGreen.png"; // rgb(159, 188, 77)
     form!: FormGroup;
-    isLoading: boolean = false;
-    loggedUser: any;
 
     get f(): any { return this.form.controls; }
 
@@ -34,9 +33,7 @@ export class ProfileComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        await this.afs.getUserByUid();
-        this.userSkills = JSON.parse(localStorage.getItem('userData')!);
-        this.loggedUser = this.authService.isLoggedIn();
+        await this.getUser();
         this.createFormGroup();
     }
 
@@ -59,17 +56,13 @@ export class ProfileComponent implements OnInit {
     selectCharacter(dino: string) {
         this.selectedDino = dino;
     }
-    updateUser(){
-        this.isLoading = true;
-        let displayName = this.f.name.value;
-        // const auth = getAuth();
-        // console.log(auth)
-        // if (auth.currentUser){
-        //     updateProfile(auth.currentUser, { displayName })
-        //     this.afs.updateCharacter(displayName, this.f.character.value, auth.currentUser.uid);
-        //     this.user = JSON.parse(localStorage.getItem('userData')!);
-        //     this.isLoading = false;
-        // }
-        // this.isLoading = false;
+    async getUser() {
+        await this.afs.getUserByUid();
+        this.userSkills = JSON.parse(localStorage.getItem('userData')!);
+        this.loggedUser = await this.authService.isLoggedIn();
+    }
+    async updateUser(){
+        await this.authService.updateUser(this.f.name.value, this.f.character.value);
+        window.location.reload();
     }
 }
