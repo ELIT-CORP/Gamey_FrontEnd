@@ -4,6 +4,8 @@ import { db } from 'src/environments/firebase';
 import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore"; 
 import { User } from '../model/user';
 import { AuthService } from '../auth/auth.service';
+import { Course } from '../model/course';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +45,7 @@ export class FirestoreDataService {
     localStorage.setItem('userData', JSON.stringify(doc.data()));
   }
 
-  // updateCharacter(username: any, character: any, userId: any){
-
-  //   this._afs.collection('user_skills').doc(userId).ref.get().then((doc) => {
-  //     localStorage.setItem('userData', JSON.stringify(doc.data()));
-  //   });
-  // }
+  getCourses(): Observable<Course[]> {
+    return this._afs.collection<Course>('Courses').valueChanges();
+  }
 }

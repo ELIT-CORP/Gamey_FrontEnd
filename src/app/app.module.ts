@@ -27,9 +27,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/signup/signup.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TrainingComponent } from './pages/training/training.component';
 
 import { environment } from "../environments/environment";
-import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoginComponent } from './pages/login/login.component';
     CharacterComponent,
     ProfileComponent,
     LoginComponent,
+    TrainingComponent,
   ],
   imports: [
     BrowserModule,
