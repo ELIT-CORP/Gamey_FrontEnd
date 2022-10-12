@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +33,8 @@ import { LoginComponent } from './pages/login/login.component';
 import {JobModal} from "./pages/job/job.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {JobAddModal} from "./pages/job/job-add.component";
+import {CommonModule} from "@angular/common";
+import {JobList} from "./pages/job/job-list.component";
 
 @NgModule({
   declarations: [
@@ -43,10 +45,12 @@ import {JobAddModal} from "./pages/job/job-add.component";
     ProfileComponent,
     LoginComponent,
     JobModal,
-    JobAddModal
+    JobAddModal,
+    JobList
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,7 +73,8 @@ import {JobAddModal} from "./pages/job/job-add.component";
     SimpleNotificationsModule.forRoot({timeOut: 3000,showProgressBar: true,pauseOnHover: true,clickToClose: false,clickIconToClose: true })
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, AuthService, AuthGuard, NoAuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
   static injector: Injector;

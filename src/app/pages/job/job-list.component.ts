@@ -10,7 +10,7 @@ import {JobAddModal} from "./job-add.component";
 import {Job} from "../../model/job";
 import {FirestoreDataService} from "../../shared/firestore-data.service";
 import {Observable} from "rxjs";
-import {DocumentChangeAction} from "@angular/fire/compat/firestore";
+import {AngularFirestore, DocumentChangeAction} from "@angular/fire/compat/firestore";
 
 
 @Component({
@@ -20,25 +20,15 @@ import {DocumentChangeAction} from "@angular/fire/compat/firestore";
 })
 export class JobList implements OnInit {
 
-  jobs: any[] = [];
+  jobs!: any[];
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private matDialog: MatDialog, private firestoreDataService: FirestoreDataService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private matDialog: MatDialog, private firestoreDataService: FirestoreDataService, private _afs: AngularFirestore) {
   }
 
-  ngOnInit(): void {
-    this.getJobs();
-
-  }
-
-  getJobs() {
-    this.firestoreDataService.getJob().subscribe(res => {
-      this.jobs = res.map(e => {
-        const data: any = e.payload.doc.data()
-        data.id = e.payload.doc.id
-        return data;
-      })
-    })
-    console.log(this.jobs)
+  async ngOnInit() {
+    await this.firestoreDataService.getJobs().subscribe(jobs => {
+      this.jobs = jobs
+    });
   }
 
   goTo(endpoint: string): void {

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { db } from 'src/environments/firebase';
-import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore";
-import { User } from '../model/user';
-import { AuthService } from '../auth/auth.service';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {getFirestore} from "firebase/firestore";
+import {User} from '../model/user';
+import {AuthService} from '../auth/auth.service';
+import {first, map, Observable} from "rxjs";
 import {Job} from "../model/job";
 
 @Injectable({
@@ -14,28 +14,28 @@ export class FirestoreDataService {
   db = getFirestore();
 
   constructor(private _afs: AngularFirestore, private authService: AuthService) {
-   }
+  }
 
   async addUser(user: User) {
     await this.authService.updateProfileUrl(user.character)
     await this._afs.collection('/user_skills').doc(user.uid).set({
       skills: user.skills,
       trait: user.trait
-     });
-   }
+    });
+  }
 
-   getUsers(){
-     return this._afs.collection('/user_skills').snapshotChanges();
-   }
+  getUsers() {
+    return this._afs.collection('/user_skills').snapshotChanges();
+  }
 
-   async userHasProfile(user: any) : Promise<boolean> {
-     const userRef = await this._afs.collection('/user_skills').doc(user.uid).ref.get();
-      if(userRef.exists){
-        return true;
-      } else {
-        return false;
-      }
-    };
+  async userHasProfile(user: any): Promise<boolean> {
+    const userRef = await this._afs.collection('/user_skills').doc(user.uid).ref.get();
+    if (userRef.exists) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   async getUserByUid() {
     let loggedUser = this.authService.isLoggedIn();
@@ -50,8 +50,12 @@ export class FirestoreDataService {
   //   });
   // }
 
-  getJob() {
-    return this._afs.collection('/Jobs').snapshotChanges();
+  // getJob() {
+  //   return this._afs.collection('/Jobs').stateChanges();
+  // }
+
+  getJobs(): Observable<Job[]> {
+    return this._afs.collection<Job>('Jobs').valueChanges();
   }
 
   // addJob(job: Job) {
