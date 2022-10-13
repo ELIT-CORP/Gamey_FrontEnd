@@ -120,27 +120,27 @@ export class AuthService {
     )
   }
   // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        this.router.navigate(['']);
-      }
-    });
-  }
+  // GoogleAuth() {
+  //   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+  //     if (res) {
+  //       this.router.navigate(['']);
+  //     }
+  //   });
+  // }
 
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['']);
-        });
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }
+  // AuthLogin(provider: any) {
+  //   return this.afAuth
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       this.ngZone.run(() => {
+  //         this.router.navigate(['']);
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       window.alert(error);
+  //     });
+  // }
 
   // Sign out
   SignOut() {

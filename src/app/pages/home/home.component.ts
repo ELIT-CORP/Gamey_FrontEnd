@@ -16,17 +16,17 @@ export class HomeComponent implements OnInit {
   public vector = "/assets/images/vector.svg";
   public items: any = [{
     title: "O Jogo",
-    description: "Avance na sua carreira de forma divertida e dinâmica! Veja as vagas disponíveis na masmorra",
+    question: "Avance na sua carreira de forma divertida e dinâmica! Veja as vagas disponíveis na masmorra",
     button: "Jogar",
     background: "/assets/images/mountain.png"
   }, {
     title: "Como Funciona",
-    description: "Aplique para vagas e teste suas habilidades avançando de fases, de forma dinâmica e eficiente! Caso prefira, é possível trocar para um modelo tradicional de avaliação também!",
+    question: "Aplique para vagas e teste suas habilidades avançando de fases, de forma dinâmica e eficiente! Caso prefira, é possível trocar para um modelo tradicional de avaliação também!",
     button: "Ver Documentação",
     background: "/assets/images/ruins.png"
   },{
-    title: "Contato", 
-    description: "Tem alguma dúvida ou sugestão?", 
+    title: "Contato",
+    question: "Tem alguma dúvida ou sugestão?",
     button: "Fale Conosco",
     background: "/assets/images/florest.png"
   }];
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   dotHelper: Array<Number> = []
 
   selectedIndex = 0;
-  arr: User[] = []; 
+  arr: User[] = [];
 
   @Input() indicators = true;
   @Input() autoSlide = true;

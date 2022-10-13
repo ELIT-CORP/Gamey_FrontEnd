@@ -27,7 +27,7 @@ export class JobAddModal implements OnInit {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
       requirements: this.formBuilder.array([this.formBuilder.group({requirement:''})]),
-      description: ['', [Validators.required]],
+      question: ['', [Validators.required]],
     })
   }
 

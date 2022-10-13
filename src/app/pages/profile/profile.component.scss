@@ -1,224 +1,248 @@
-.container{
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F6F6F6;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10%;
+  padding: 0 2rem;
+  width: 80%;
+  margin: 0 auto;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+
+  .logo {
+    height: 100%;
+    min-height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .nes-btn {
+    margin-left: 10px;
+    min-width: 100px;
+  }
+}
+
+.body-profile {
+  height: calc(100% - 200px);
+  width: 80%;
+  border-radius: 16px;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+  background-image: url("/assets/images/florest.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 1);
+
+  &::before {
+    content: '';
     width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: #F6F6F6;
-    align-items: center;
-    justify-content: space-around;
+    height: 100%;
+    background: black;
+    position: absolute;
+    z-index: 0;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+  }
 }
-.nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 10%;
-    padding: 0 2rem;
-    width: 80%;
-    margin: 0 auto;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 400;
+
+.info {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 1rem;
+  z-index: 9999;
+
+  .text {
+    text-transform: capitalize;
+    font-weight: 600;
     font-size: 1.2rem;
+    line-height: initial;
+    color: rgba(250, 250, 250, 1);
+  }
 
-    .logo {
-        height: 100%;
-        min-height: 80px;
-        margin-bottom: 1rem;
-    }
-    .nes-btn{
-        margin-left: 10px;
-        min-width: 100px;
-    }
-}
-.body-profile{
-    height: calc(100% - 200px);
-    width: 80%;
-    border-radius: 16px;
-    align-items: center;
+  .name {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    padding: 0.5rem 3.8rem;
+    background-color: rgb(33, 37, 30);
+    z-index: 999;
+    text-align: center;
+    width: 100%;
+    margin: -1rem 1rem 1rem 1rem;
+
+    span {
+      text-transform: uppercase;
+    }
+
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 97%;
+      background-color: rgb(33, 37, 30);
+      z-index: -1;
+    }
+
+    &:after {
+      transform: translate(5px, -5px);
+    }
+
+    &:before {
+      transform: translate(5px, 5px);
+    }
+
+    button {
+      position: absolute;
+      right: 30%;
+      top: 0;
+      color: #F6F6F6;
+      outline: none !important;
+
+      &:focus {
+        outline: none !important;
+      }
+
+    }
+  }
+}
+
+.skills {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 2rem;
+  z-index: 9999;
+
+  article {
+    display: flex;
     flex-direction: row;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    position: relative;
-    background-image: url("/assets/images/florest.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(255, 255, 255, 1);
-
-    &::before{
-        content: '';
-        width: 100%;
-        height: 100%;
-        background: black;
-        position: absolute;
-        z-index: 0;
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(17px);
-        -webkit-backdrop-filter: blur(17px);
-    }
-}
-.info{
-    width: 30%;
-    height: 100%;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 1rem;
-    z-index: 9999;
-    .text{
-        text-transform: capitalize;
-        font-weight: 600;
-        font-size: 1.2rem;
-        line-height: initial;
-        color:rgba(250, 250, 250, 1);
-    }
-    .name{
-        position: relative;
-        padding: 0.5rem 3.8rem;
-        background-color: rgb(33, 37, 30);
-        z-index: 999;
-        text-align: center;
-        width: 100%;
-        margin: -1rem 1rem 1rem 1rem;
-        span{
-            text-transform: uppercase;  
-        }
-        &:after, &:before{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 97%;
-            background-color: rgb(33, 37, 30);
-            z-index: -1;
-        }
-        &:after{
-            transform: translate(5px, -5px);
-        }
-        &:before{
-            transform: translate(5px, 5px);
-        }
-        button{
-            position: absolute;
-            right: 30%;
-            top: 0;
-            color: #F6F6F6;
-            outline: none !important;
-            &:focus{
-                outline: none !important;
-            }
-
-        }
-    }
-}
-.skills{
-    height: 100%;
-    width: 90%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 2rem;
-    z-index: 9999;
-    article{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: 1rem;
-        p{
-            font-size: 1.2rem;
-            margin-left: 0.5rem;
-            line-height: initial;
-            font-weight: 500;
-            font-family: 'Oswald', sans-serif;
-        }
-    }
-}
-.profile-edit{
-    height: 100%;
-    width: 90%;
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    button{
-        font-size: 1.2rem;
-        margin-top: 1.2rem;
-        padding: 0 2rem;
-    }
-}
-.nes-badge{
-    position: relative;
-    button{
-        position: absolute;
-        z-index: 1;
-        right: -25%;
-        bottom: 40%;  
-        color: white;
-        transition: all 40ms;
-    }
-}
-.select-button {
-    border-radius: 50%;
-    border: 0;
-    overflow: hidden;
-    opacity: 0.5;
-    box-shadow: 5px 10px rgba(5, 5, 5, 0);
-    background: rgba(255, 255, 255, 0.9);
-    transition: 0.5s;
-    width: fit-content;
     margin-left: 1rem;
 
-    &:first-of-type{
-        margin-left: 0 !important;
+    p {
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
+      line-height: initial;
+      font-weight: 500;
+      font-family: 'Oswald', sans-serif;
     }
-    &:hover {
-        outline: 0 !important;
-        opacity: 1;
-        box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
-    }
+  }
 }
+
+.profile-edit {
+  height: 100%;
+  width: 90%;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  button {
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+    padding: 0 2rem;
+  }
+}
+
+.nes-badge {
+  position: relative;
+
+  button {
+    position: absolute;
+    z-index: 1;
+    right: -25%;
+    bottom: 40%;
+    color: white;
+    transition: all 40ms;
+  }
+}
+
+.select-button {
+  border-radius: 50%;
+  border: 0;
+  overflow: hidden;
+  opacity: 0.5;
+  box-shadow: 5px 10px rgba(5, 5, 5, 0);
+  background: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
+  width: fit-content;
+  margin-left: 1rem;
+
+  &:first-of-type {
+    margin-left: 0 !important;
+  }
+
+  &:hover {
+    outline: 0 !important;
+    opacity: 1;
+    box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
+  }
+}
+
 .dinos {
-    position: relative;
-    top: 20px;
-    left: -10px;
+  position: relative;
+  top: 20px;
+  left: -10px;
 }
+
 :host ::ng-deep .mat-radio-button .mat-radio-container {
-    width: 0;
+  width: 0;
 }
 
 :host ::ng-deep .mat-radio-container .mat-radio-outer-circle,
 :host ::ng-deep .mat-radio-container .mat-radio-inner-circle {
-    border: none;
-    width: 0;
+  border: none;
+  width: 0;
 }
 
 :host ::ng-deep .mat-checkbox-inner-container {
-    display: none;
-    border: none;
-    width: 0;
+  display: none;
+  border: none;
+  width: 0;
 }
 
 :host ::ng-deep .mat-checkbox-label {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    background-color: rgba(250, 250, 250, 0.8);
-    border-radius: 5px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-radius: 5px;
 }
+
 .mat-radio-checked {
-    outline: 0 !important;
-    opacity: 1;
-    box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
-    transform: scale(1.1);
+  outline: 0 !important;
+  opacity: 1;
+  box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
+  transform: scale(1.1);
 }
