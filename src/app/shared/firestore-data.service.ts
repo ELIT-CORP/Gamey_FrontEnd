@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {getFirestore} from "firebase/firestore";
+import { getFirestore, updateDoc } from "firebase/firestore";
 import {User} from '../model/user';
 import {AuthService} from '../auth/auth.service';
 import {first, map, Observable} from "rxjs";
@@ -24,6 +24,13 @@ export class FirestoreDataService {
       skills: user.skills,
       trait: user.trait
     });
+  }
+
+  async addUserSkill(skill: any){
+    let user = this.authService.userData;
+    let userData = JSON.parse(localStorage.getItem('userData')!);
+    userData.skills.push(skill);
+    await this._afs.collection('/user_skills').doc(user.uid).update({ skills: userData.skills})
   }
 
   getUsers() {

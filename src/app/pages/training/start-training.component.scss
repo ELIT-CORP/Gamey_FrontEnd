@@ -145,3 +145,12 @@
     width: 30px;
     height: 30px;
 }
+button:hover, :host ::ng-deep .mat-radio-label:hover{
+    cursor: url('/assets/images/cursor.png'), auto;
+}
+.confirm{
+    top: -12%;
+    left: 80%;
+    width: 150px;
+    font-size: 1.5rem;
+}

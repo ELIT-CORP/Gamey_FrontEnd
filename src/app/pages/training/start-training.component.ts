@@ -18,12 +18,13 @@ export class StartTrainingComponent implements OnInit {
     @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>;
     
     idCourse!: string;
-    course!: any;
+    course!: Course | any;
     selectedIndex = 0;
-    currentSlide: number = 1
+    currentSlide: number = 0
     answers: number[] = [];
     slider!: KeenSliderInstance;
-    dotHelper: Array<Number> = []
+    dotHelper: Array<Number> = [];
+    isLoading: boolean = false;
 
     @Input() indicators = false;
     @Input() autoSlide = false;
@@ -34,12 +35,13 @@ export class StartTrainingComponent implements OnInit {
     
     ngOnInit(): void {
         this.idCourse = this.activatedRoute.snapshot.params['id'];
-        this.getCourse(this.idCourse); 
-    }
+        this.getCourse(this.idCourse);
+    };
 
     async getCourse(courseId: string) {
         await this.afs.getCourseById(courseId).then((data: any) => {
             this.course = data;
+            this.answers = Array(this.course.questions.length).fill(-1);
         });
     }
     goTo(endpoint: string): void {
@@ -80,5 +82,33 @@ export class StartTrainingComponent implements OnInit {
 
     ngOnDestroy() {
         if (this.slider) this.slider.destroy()
+    }
+
+    setAnswers(question: number, answer: number, correctAnswer: any) {
+        if(answer == correctAnswer)
+            this.answers[question] = 1;
+        if(answer != correctAnswer) 
+            this.answers[question] = 0;
+    }
+    async saveAnswer(){
+        this.isLoading = true;
+        let sum = this.answers.reduce((a, b) => a + b, 0)
+        let score = this.answers.length/2 + 1;
+        // if(sum >= score)
+            await this.success();
+        // if (sum < score)
+        //     this.notifications.error('Que pena', 'Você não atingiu nota suficiente para ganhar um selo')
+
+        this.isLoading = false;
+        // this.router.navigate(['/profile']);
+    }
+
+    async success(){
+        let skill = {
+            name: this.course.name,
+            url: this.course.url
+        }
+        await this.afs.addUserSkill(skill);
+        this.notifications.success('Parabéns', 'Você conquistou seu selo')
     }
 }

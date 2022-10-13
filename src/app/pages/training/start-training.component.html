@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
     <nav class="nav">
         <img src="/assets/images/logo.png" class="logo" />
         <div style="display: flex; align-items: center;">
@@ -9,17 +9,18 @@
     <p class="course-name">{{course.name}}</p>
     <div class="content">
         <div class="keen-slider keen-slider--vertical" #sliderRef>
-            <div class="keen-slider__slide slide" *ngFor="let item of course.questions; let i=index">
+            <div class="keen-slider__slide slide" *ngFor="let item of course.questions; let itemIndex=index">
                 <div class="item">
                     <h1 style="margin: 0" class="title">{{item.text}}</h1>
                     <mat-radio-group class="answers">
-                        <mat-radio-button *ngFor="let answer of item.answer; let i=index" disableRipple="true" [value]="i">
+                        <mat-radio-button *ngFor="let answer of item.answer; let i=index" disableRipple="true" [value]="i" (click)="setAnswers(itemIndex, i, item.correctAnswer)">
                             <p>{{answer}}</p>
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
             </div>
         </div>
+        <button class="nes-btn confirm" [ngClass]="answers.includes(-1) ? 'is-disabled': 'is-success'" (click)="saveAnswer()" >Confirmar</button>
         <button mat-icon-button [ngClass]="'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')"
             (click)="slider.prev()">
             <mat-icon>chevron_left</mat-icon>
