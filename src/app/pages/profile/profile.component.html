@@ -22,7 +22,8 @@
             <p class="text">{{userSkills.trait}}</p>
         </section>
         <section class="skills" *ngIf="!editable">
-            <h2 style="font-size: 1.8rem">Habilidades desbloqueadas:</h2>
+            <h2 style="font-size: 1.8rem" *ngIf="userSkills.skills.length > 0">Habilidades desbloqueadas:</h2>
+            <h2 style="font-size: 1.8rem" *ngIf="userSkills.skills.length == 0">Você não desbloqueou nenhuma Habilidade</h2>
             <article *ngFor="let skill of userSkills.skills">
                 <img style="width: 80px"[src]="skill.url"/>
                 <p style="text-transform: capitalize;">{{skill.name}}</p>

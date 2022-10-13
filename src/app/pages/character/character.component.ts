@@ -101,13 +101,13 @@ export class CharacterComponent implements OnInit {
 
   async updateUser() {
     this.isLoading = true;
-
     const model: User = {
       uid: this.user.uid,
       character: this.characterForm.value.character,
-      skills: Array.from(this.setSkills),
+      skills: [],
       trait: this.traits.at(Math.floor(Math.random() * 5))
     }
+    localStorage.setItem('validateSkills', JSON.stringify(Array.from(this.setSkills)));
     this.isLoading = false;
     await this.afs.addUser(model)
     await this.router.navigate(['/profile']);

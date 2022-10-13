@@ -97,10 +97,15 @@ export class StartTrainingComponent implements OnInit {
         if(sum >= score)
             await this.success();
         if (sum < score)
-            this.notifications.error('Que pena', 'Você não atingiu nota suficiente para ganhar um selo')
+            this.notifications.error('Que pena', 'Você não atingiu nota suficiente para ganhar um selo, tente novamente mais tarde')
 
+        let skills = await JSON.parse(localStorage.getItem('validateSkills')!);
+        if (skills != null && skills != undefined && skills.length > 0){
+            skills.splice(0, 1);
+            await localStorage.setItem('validateSkills', JSON.stringify(skills));
+        }
         this.isLoading = false;
-        // this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']);
     }
 
     async success(){

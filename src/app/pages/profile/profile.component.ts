@@ -33,6 +33,10 @@ export class ProfileComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
+        let skills = await JSON.parse(localStorage.getItem('validateSkills')!);
+        if (skills != null && skills != undefined && skills.length > 0)
+            this.router.navigate([`/training/${skills[0].name}`]);
+        
         await this.getUser();
         this.createFormGroup();
     }
