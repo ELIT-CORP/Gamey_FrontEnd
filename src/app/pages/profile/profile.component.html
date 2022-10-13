@@ -11,7 +11,7 @@
         <section class="info">
             <img [src]="loggedUser.photoURL">
             <div class="name">
-                <span class="text">{{loggedUser.displayName}}</span>
+                <span class="text is-dark">{{loggedUser.displayName}}</span>
                 <button mat-icon-button (click)="setEditable()" *ngIf="!editable">
                     <mat-icon class="nes-icon is-small">edit</mat-icon>
                 </button>
@@ -21,14 +21,25 @@
             </div>
             <p class="text">{{userSkills.trait}}</p>
         </section>
-        <section class="skills" *ngIf="!editable">
-            <h2 style="font-size: 1.8rem" *ngIf="userSkills.skills.length > 0">Habilidades desbloqueadas:</h2>
-            <h2 style="font-size: 1.8rem" *ngIf="userSkills.skills.length == 0">Você não desbloqueou nenhuma Habilidade</h2>
-            <article *ngFor="let skill of userSkills.skills">
-                <img style="width: 80px"[src]="skill.url"/>
-                <p style="text-transform: capitalize;">{{skill.name}}</p>
-            </article>
-        </section>
+        <mat-tab-group class="content" *ngIf="!editable">
+            <mat-tab class="skills" label="Habilidades" style="margin-top: 40px">
+                <h2 style="font-size: 1.8rem; margin-top: 1rem;" *ngIf="userSkills.skills.length == 0">Você não desbloqueou nenhuma Habilidade</h2>
+                <div class="unlocked-skills">
+                    <article *ngFor="let skill of userSkills.skills">
+                        <img style="width: 80px" [src]="skill.url" />
+                        <p style="text-transform: capitalize;">{{skill.name}}</p>
+                    </article>
+                </div>
+            </mat-tab>
+            <mat-tab class="jobs" label="Vagas" style="margin-top: 40px">
+                <h2 style="font-size: 1.8rem; margin-top: 1rem; margin-left: 1rem;" *ngIf="userJobs == undefined">Você não se cadastrou em nenhuma Vaga</h2>
+                <div class="regirested-jobs">
+                    <article *ngFor="let job of userJobs">
+                        <p style="text-transform: capitalize">{{job}}</p>
+                    </article>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
         <form class="profile-edit" *ngIf="editable" [formGroup]="form" >
             <mat-form-field appearance="outline" style="z-index: 1000; min-width: 320px">
                 <mat-label>Nome de Usuario</mat-label>

@@ -41,7 +41,6 @@ export class JobModal implements OnInit {
   }
 
   async registerJob(){
-    debugger;
     if (await this.afs.userHasJobs(this.user.uid)){
       await this.afs.getUserJobById(this.user.uid).then((data: any) => {
         this.updatedJobs = data.jobs;

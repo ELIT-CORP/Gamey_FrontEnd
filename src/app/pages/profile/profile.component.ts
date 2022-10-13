@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     selectedDino: string = "/assets/character/dinoBlue.png";
     userInfo: any;
     userSkills: any = [];
+    userJobs: any = [];
     loggedUser: any;
     editable: boolean = false;
     dinoBlue: string = "/assets/character/dinoBlue.png"; // rgb(77, 146, 188)
@@ -64,6 +65,10 @@ export class ProfileComponent implements OnInit {
         await this.afs.getUserSkillsByUid();
         this.userSkills = await JSON.parse(localStorage.getItem('userData')!);
         this.loggedUser = await this.authService.isLoggedIn();
+        await this.afs.getUserJobById(this.loggedUser.uid).then((job: any) =>{
+            this.userJobs = job.jobs;
+            console.log(this.userJobs);
+        });
     }
     async updateUser(){
         await this.authService.updateUser(this.f.name.value, this.f.character.value);

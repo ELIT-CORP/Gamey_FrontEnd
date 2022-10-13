@@ -35,6 +35,7 @@ import { JobAddModal } from "./pages/job/job-add.component";
 import { CommonModule } from "@angular/common";
 import { JobList } from "./pages/job/job-list.component";
 import { StartTrainingComponent } from './pages/training/start-training.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 import { environment } from "../environments/environment";
@@ -74,6 +75,7 @@ import { environment } from "../environments/environment";
     MatStepperModule,
     MatButtonModule,
     MatDialogModule,
+    MatTabsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     SimpleNotificationsModule.forRoot({timeOut: 3000,showProgressBar: true,pauseOnHover: true,clickToClose: false,clickIconToClose: true })
   ],
