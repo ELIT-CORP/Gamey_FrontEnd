@@ -6,14 +6,17 @@
             <button class="nes-btn btn1 is-primary" (click)="goTo('job')">Vagas</button>
         </div>
     </nav>
-        <p class="title">{{course.name}}</p>
+    <p class="course-name">{{course.name}}</p>
     <div class="content">
         <div class="keen-slider keen-slider--vertical" #sliderRef>
             <div class="keen-slider__slide slide" *ngFor="let item of course.questions; let i=index">
                 <div class="item">
                     <h1 style="margin: 0" class="title">{{item.text}}</h1>
-                    <!-- <p class="description">{{item.description}}</p>
-                    <button class="playBtn nes-btn is-warning">{{item.button}}</button> -->
+                    <mat-radio-group class="answers">
+                        <mat-radio-button *ngFor="let answer of item.answer; let i=index" disableRipple="true" [value]="i">
+                            <p>{{answer}}</p>
+                        </mat-radio-button>
+                    </mat-radio-group>
                 </div>
             </div>
         </div>

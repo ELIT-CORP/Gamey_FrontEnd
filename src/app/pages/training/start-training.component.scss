@@ -55,14 +55,36 @@
           background-blend-mode: multiply;
       }
       .item {
-          margin: 0 3rem !important;
-      }
-      .title {
-          width: fit-content;
-          height: 53px;
-          font-family: 'Rubik', sans-serif;
-          font-size: 3rem;
-          line-height: initial;
+        margin: 1rem 3rem !important;
+        height: 100%;  
+        width: 90%;
+        .title {
+            width: fit-content;
+            height: 53px;
+            font-family: 'Rubik', sans-serif;
+            font-size: 3rem;
+            line-height: initial;
+            height: fit-content;
+            text-indent: 3rem;
+            word-break: keep-all;
+        }
+        .answers{
+            height: fit-content !important;
+            padding: 1rem 5px;
+            width: 100% !important;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 1.5rem;
+            .mat-radio-button{
+                line-height: initial;
+                margin: 5px 0;
+            }
+            p{
+                margin: 0 !important;
+            }
+        }
       }
   }
 }
@@ -77,7 +99,7 @@
     line-height: initial;
     margin: 0 !important;
     z-index: 9999;
-    top: 18%;
+    top: 16%;
     left: 20%;
 }
 .arrow {
@@ -112,4 +134,14 @@
 
 .arrow--disabled {
     opacity: 0.4;
+}
+:host ::ng-deep .mat-radio-container .mat-radio-outer-circle,
+:host ::ng-deep .mat-radio-container .mat-radio-inner-circle {
+    border: 2px solid white;
+    width: 30px;
+    height: 30px;
+}
+:host ::ng-deep .mat-radio-container{
+    width: 30px;
+    height: 30px;
 }
