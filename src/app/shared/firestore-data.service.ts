@@ -78,7 +78,7 @@ export class FirestoreDataService {
     }
   };
 
-  async getUserByUid() {
+  async getUserSkillsByUid() {
     let loggedUser = this.authService.isLoggedIn();
     const doc = await this._afs.collection('/user_skills').doc(loggedUser.uid).ref.get();
     localStorage.removeItem('userData');

@@ -20,6 +20,9 @@ export class JobModal implements OnInit {
   private _unsubscribeAll: Subject<any>;
   job:Job;
   user!:User;
+  requirements: any[] = [];
+
+  userSkills: any = [];
 
   setJobs = new Set<any>();
 
@@ -33,6 +36,8 @@ export class JobModal implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.isLoggedIn();
+    this.requirements = this.job.requirements;
+    this.hasRequirements();
   }
 
   async registerJob(){
@@ -40,32 +45,54 @@ export class JobModal implements OnInit {
       await this.afs.getUserJobById(this.user.uid).then((data: any) => {
         this.updatedJobs = data.jobs;
       });
-      this.updatedJobs.push(this.job.title);
-      const model: any = {
-        uid: this.user.uid,
-        jobs: this.updatedJobs,
+      if (!this.updatedJobs.includes(this.job.title)){
+        this.updatedJobs.push(this.job.title);
+        const model: any = {
+          uid: this.user.uid,
+          jobs: this.updatedJobs,
+        }
+        await this.afs.updateUserJobs(model);
+
+        this.close();
+        this.notifications.success(
+          'Sucesso',
+          'Cadastro feito com sucesso',
+        )
+        await this.router.navigate(['/profile']);
+      } else {
+        this.notifications.error(
+          'Erro',
+          "Você ja se cadastrou nessa vaga",
+        )
       }
-      await this.afs.updateUserJobs(model);
     } else {
       this.setJobs.add(this.job.title);
-      console.log(this.updatedJobs)
       const model: any = {
         uid: this.user.uid,
         jobs: Array.from(this.setJobs),
       }
       await this.afs.addUserJobs(model)
+      this.close();
+      this.notifications.success(
+        'Sucesso',
+        'Cadastro feito com sucesso',
+      )
+      await this.router.navigate(['/profile']);
     }
-
-    this.close();
-    this.notifications.success(
-      'Sucesso',
-      'Cadastro feito com sucesso',
-    )
-    await this.router.navigate(['/profile']);
   }
 
   close(): void {
     this.dialogRef.close();
+  }
+
+  async hasRequirements(): Promise<boolean>{
+    await this.afs.getUserSkillsByUid()
+    this.userSkills = await JSON.parse(localStorage.getItem('userData')!);
+
+    for (var i = 0; i < this.requirements.length; ++i) {
+      if (this.requirements[i] !== this.userSkills[i]) return false;
+    }
+    return true;
   }
 
   ngOnDestroy(): void {

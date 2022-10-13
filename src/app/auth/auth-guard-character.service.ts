@@ -44,7 +44,7 @@ export class AuthGuardCharacter implements CanActivate {
         if (await this.afs.userHasProfile(user) == false) {
             return true;
         }
-        this.afs.getUserByUid();
+        this.afs.getUserSkillsByUid();
         this.route.navigate(['/profile']);
         return false;
     }

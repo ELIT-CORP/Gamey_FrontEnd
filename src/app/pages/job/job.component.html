@@ -7,7 +7,7 @@
     </ul>
     <h3>Descrição: </h3>
     <p class="description-container">{{job.description}}</p>
-    <button type="button" class="nes-btn is-primary" (click)="registerJob()">
+    <button type="button" class="nes-btn is-primary" (click)="registerJob()" [disabled]="hasRequirements()">
       Quero essa vaga!
     </button>
   </div>
