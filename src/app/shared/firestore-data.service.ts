@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
-import { getFirestore, updateDoc } from "firebase/firestore";
+import {getFirestore, updateDoc} from "firebase/firestore";
 import {User} from '../model/user';
 import {AuthService} from '../auth/auth.service';
 import {first, map, Observable} from "rxjs";
 import {Job} from "../model/job";
-import { db } from 'src/environments/firebase';
-import { Course } from '../model/course';
+import {db} from 'src/environments/firebase';
+import {Course} from '../model/course';
+import {NotificationsService} from "angular2-notifications";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,11 @@ export class FirestoreDataService {
 
   db = getFirestore();
 
-  constructor(private _afs: AngularFirestore, private authService: AuthService) {
+  constructor(private _afs: AngularFirestore, private authService: AuthService,
+              private notifications: NotificationsService) {
   }
 
-  async addUser(user: User) {
+  async addUserSkills(user: User) {
     await this.authService.updateProfileUrl(user.character)
     await this._afs.collection('/user_skills').doc(user.uid).set({
       skills: user.skills,
@@ -26,11 +28,41 @@ export class FirestoreDataService {
     });
   }
 
-  async addUserSkill(skill: any){
+  async updateUserSkills(skill: any) {
     let user = this.authService.userData;
     let userData = JSON.parse(localStorage.getItem('userData')!);
     userData.skills.push(skill);
-    await this._afs.collection('/user_skills').doc(user.uid).update({ skills: userData.skills})
+    await this._afs.collection('/user_skills').doc(user.uid).update({skills: userData.skills})
+  }
+
+  async addUserJobs(user: any) {
+    await this._afs.collection('/user_jobs').doc(user.uid).set({
+      jobs: user.jobs,
+    }).catch((e) => {
+      this.notifications.error(
+        'Erro',
+        e.message,
+      )
+    });
+  }
+
+  async updateUserJobs(user: any) {
+    await this._afs.collection('/user_jobs').doc(user.uid).update({jobs: user.jobs}).catch((e) => {
+      this.notifications.error(
+        'Erro',
+        e.message,
+      )
+    });
+  }
+
+  async userHasJobs(userUID: any): Promise<boolean> {
+    const userRef = await this._afs.collection('/user_jobs').doc(userUID).ref.get();
+    return userRef.exists;
+  };
+
+  async getUserJobById(userUID: any) {
+    const doc = await this._afs.collection<any>('/user_jobs').doc(userUID).ref.get();
+    return doc.data();
   }
 
   getUsers() {
@@ -77,6 +109,7 @@ export class FirestoreDataService {
   getCourses(): Observable<Course[]> {
     return this._afs.collection<Course>('Courses').valueChanges();
   }
+
   async getCourseById(courseId: string) {
     const doc = await this._afs.collection<Course>('/Courses').doc(courseId).ref.get();
     return doc.data();

@@ -16,7 +16,7 @@ import KeenSlider, { KeenSliderInstance } from "keen-slider"
 export class StartTrainingComponent implements OnInit {
 
     @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>;
-    
+
     idCourse!: string;
     course!: Course | any;
     selectedIndex = 0;
@@ -32,7 +32,7 @@ export class StartTrainingComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService, private activatedRoute: ActivatedRoute) {
     }
-    
+
     ngOnInit(): void {
         this.idCourse = this.activatedRoute.snapshot.params['id'];
         this.getCourse(this.idCourse);
@@ -87,7 +87,7 @@ export class StartTrainingComponent implements OnInit {
     setAnswers(question: number, answer: number, correctAnswer: any) {
         if(answer == correctAnswer)
             this.answers[question] = 1;
-        if(answer != correctAnswer) 
+        if(answer != correctAnswer)
             this.answers[question] = 0;
     }
     async saveAnswer(){
@@ -113,7 +113,7 @@ export class StartTrainingComponent implements OnInit {
             name: this.course.name,
             url: this.course.url
         }
-        await this.afs.addUserSkill(skill);
+        await this.afs.updateUserSkills(skill);
         this.notifications.success('Parabéns', 'Você conquistou seu selo')
     }
 }

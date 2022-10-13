@@ -109,7 +109,7 @@ export class CharacterComponent implements OnInit {
     }
     localStorage.setItem('validateSkills', JSON.stringify(Array.from(this.setSkills)));
     this.isLoading = false;
-    await this.afs.addUser(model)
+    await this.afs.addUserSkills(model)
     await this.router.navigate(['/profile']);
   }
 
@@ -118,7 +118,7 @@ export class CharacterComponent implements OnInit {
       name: event.source.value.name,
       url: event.source.value.url
     }
-    if (event.source.checked) 
+    if (event.source.checked)
       return this.setSkills.add(skill);
     return this.setSkills.delete(skill);
   }
