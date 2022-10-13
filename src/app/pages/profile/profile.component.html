@@ -24,8 +24,8 @@
         <section class="skills" *ngIf="!editable">
             <h2 style="font-size: 1.8rem">Habilidades desbloqueadas:</h2>
             <article *ngFor="let skill of userSkills.skills">
-                <img src="/assets/character/Hard/{{skill}}.png"/>
-                <p>{{skill}}</p>
+                <img style="width: 80px"[src]="skill.url"/>
+                <p style="text-transform: capitalize;">{{skill.name}}</p>
             </article>
         </section>
         <form class="profile-edit" *ngIf="editable" [formGroup]="form" >

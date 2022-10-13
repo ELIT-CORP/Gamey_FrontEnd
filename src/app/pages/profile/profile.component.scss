@@ -84,6 +84,8 @@
   .name {
     display: flex;
     position: relative;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem 3.8rem;
     background-color: rgb(33, 37, 30);
     z-index: 999;
@@ -93,6 +95,7 @@
 
     span {
       text-transform: uppercase;
+      margin-right: 1rem;
     }
 
     &:after, &:before {

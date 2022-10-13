@@ -7,6 +7,7 @@ import {FirestoreDataService} from "src/app/shared/firestore-data.service";
 import {User} from "src/app/model/user";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import KeenSlider, {KeenSliderInstance} from "keen-slider";
+import { Course } from "src/app/model/course";
 
 @Component({
   selector: 'character.component',
@@ -26,7 +27,7 @@ export class CharacterComponent implements OnInit {
   user: any;
   selectedCharacter!: string;
   arr: any[] = [];
-  setSkills = new Set<string>();
+  setSkills = new Set<any>();
 
   items: any = [{
     question: "Fico entediado quando realizo atividade que são repetitivas",
@@ -52,6 +53,7 @@ export class CharacterComponent implements OnInit {
   selectedIndex = 0;
 
   answers: any[] = [];
+  courses: any[] = []
 
   @Input() indicators = true;
   @Input() autoSlide = false;
@@ -60,9 +62,12 @@ export class CharacterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifications: NotificationsService, private afs: FirestoreDataService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.user = this.authService.isLoggedIn();
     this.createFormGroup();
+    await this.afs.getCourses().subscribe(data => {
+      this.courses = data;
+    })
     if (this.autoSlide) {
       this.autoSlideItems();
     }
@@ -108,10 +113,14 @@ export class CharacterComponent implements OnInit {
     await this.router.navigate(['/profile']);
   }
 
-  toggleSkills(event: MatCheckboxChange) {
-    if (event.source.checked)
-      return this.setSkills.add(event.source.value);
-    return this.setSkills.delete(event.source.value);
+  toggleSkills(event: any) {
+    let skill = {
+      name: event.source.value.name,
+      url: event.source.value.url
+    }
+    if (event.source.checked) 
+      return this.setSkills.add(skill);
+    return this.setSkills.delete(skill);
   }
 
   get f(): any {

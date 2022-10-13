@@ -36,35 +36,10 @@
         <mat-step [stepControl]="characterForm" [optional]="true">
           <ng-template matStepLabel>Selecione suas Habilidades</ng-template>
           <section class="steps" style="width: 60%; flex-direction: column; align-items: flex-start;">
-            <mat-checkbox value="Porgramação" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-              <img class="nes-avatar is-medium" alt="axe" src="/assets/character/Hard/axe.png"
+            <mat-checkbox *ngFor="let c of courses, let i=index" [value]="c" disableRipple="true" style="width: 80%;margin-top: 1rem;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="axe" [src]="c.url"
                    style="image-rendering: pixelated;">
-              <p class="skill">Linguagem de Programação</p>
-            </mat-checkbox>
-            <span style="margin: 10px 0;"></span>
-            <mat-checkbox value="Lógica" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-              <img class="nes-avatar is-medium" alt="crossbow" src="/assets/character/Hard/crossbow.png"
-                   style="image-rendering: pixelated;">
-              <p class="skill">Pensamento Lógico</p>
-            </mat-checkbox>
-            <span style="margin: 10px 0;"></span>
-            <mat-checkbox value="UX" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-              <img class="nes-avatar is-medium" alt="dagger" src="/assets/character/Hard/dagger.png"
-                   style="image-rendering: pixelated;">
-              <p class="skill">Experiência de Usuário</p>
-            </mat-checkbox>
-            <span style="margin: 10px 0;"></span>
-            <mat-checkbox value="IA" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-              <img class="nes-avatar is-medium" alt="shield" src="/assets/character/Hard/shield.png"
-                   style="image-rendering: pixelated;">
-              <p class="skill">Inteligência Artificial</p>
-            </mat-checkbox>
-            <span style="margin: 10px 0;"></span>
-            <mat-checkbox value="Manejo de pessoas" disableRipple="true" style="width: 80%;"
-                          (change)="toggleSkills($event)">
-              <img class="nes-avatar is-medium" alt="sword" src="/assets/character/Hard/sword.png"
-                   style="image-rendering: pixelated;">
-              <p class="skill">Manejo de pessoas</p>
+              <p class="skill">{{c.name}}</p>
             </mat-checkbox>
           </section>
           <div class="left-50">
