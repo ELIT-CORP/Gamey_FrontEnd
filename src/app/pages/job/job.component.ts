@@ -37,10 +37,11 @@ export class JobModal implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.isLoggedIn();
     this.requirements = this.job.requirements;
-    this.hasRequirements();
+    // this.hasRequirements();
   }
 
   async registerJob(){
+    debugger;
     if (await this.afs.userHasJobs(this.user.uid)){
       await this.afs.getUserJobById(this.user.uid).then((data: any) => {
         this.updatedJobs = data.jobs;
@@ -60,10 +61,12 @@ export class JobModal implements OnInit {
         )
         await this.router.navigate(['/profile']);
       } else {
+        this.close();
         this.notifications.error(
           'Erro',
-          "Você ja se cadastrou nessa vaga",
+          "Você ja se cadastrou para essa vaga",
         )
+        await this.router.navigate(['/profile']);
       }
     } else {
       this.setJobs.add(this.job.title);
@@ -86,12 +89,12 @@ export class JobModal implements OnInit {
   }
 
   async hasRequirements(): Promise<boolean>{
-    await this.afs.getUserSkillsByUid()
-    this.userSkills = await JSON.parse(localStorage.getItem('userData')!);
+    // await this.afs.getUserSkillsByUid()
+    // this.userSkills = await JSON.parse(localStorage.getItem('userData')!);
 
-    for (var i = 0; i < this.requirements.length; ++i) {
-      if (this.requirements[i] !== this.userSkills[i]) return false;
-    }
+    // for (var i = 0; i < this.requirements.length; ++i) {
+    //   if (this.requirements[i] !== this.userSkills[i]) return false;
+    // }
     return true;
   }
 
