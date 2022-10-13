@@ -79,7 +79,7 @@
     background: rgba(255, 255, 255, 0.9);
     transition: 0.5s;
     width: fit-content;
-    
+
 
     &:hover {
         outline: 0 !important;
@@ -99,7 +99,7 @@
 .mat-stepper-vertical {
     background-color: transparent !important;
 }
-.mat-radio-checked{
+.steps .mat-radio-checked{
     outline: 0 !important;
     opacity: 1;
     box-shadow: 5px 10px rgba(5, 5, 5, 0.3);
@@ -165,11 +165,11 @@
         box-shadow: inset -6px -6px rgb(230, 230, 230) !important;
     }
 }
-:host ::ng-deep .mat-radio-button .mat-radio-container {
+:host ::ng-deep .steps .mat-radio-button .mat-radio-container {
     width: 0;
 }
-:host ::ng-deep .mat-radio-container .mat-radio-outer-circle,
-:host ::ng-deep .mat-radio-container .mat-radio-inner-circle {
+:host ::ng-deep .steps .mat-radio-container .mat-radio-outer-circle,
+:host ::ng-deep .steps .mat-radio-container .mat-radio-inner-circle {
     border: none;
     width: 0;
 }
@@ -191,4 +191,115 @@
 }
 :host ::ng-deep .mat-step-icon, :host ::ng-deep .mat-step-optional{
     display: none;
+}
+
+.carousel{
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  margin: 15px;
+  .keen-slider{
+    height: 100%;
+    color: #F6F6F6;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    .slide{
+      display: flex !important;
+      align-items: center !important;
+      flex-direction: column !important;
+      justify-content: space-around !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      background-color: transparent;
+      background-blend-mode: multiply;
+    }
+    .item{
+      margin: 0 3rem !important;
+    }
+    .answers{
+      height: fit-content !important;
+      width: 100% !important;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      font-size: 1.5rem;
+      align-items: center;
+      .mat-radio-button{
+        line-height: initial;
+        margin: 5px 0;
+      }
+      p{
+        margin: 0 !important;
+      }
+    }
+    .description{
+      max-width: 100%;
+      margin: 1rem 0 1rem 2rem;
+      height: fit-content;
+      font-family: 'Rubik', sans-serif;
+      color: black;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+    .playBtn {
+      width: fit-content;
+      min-width: 180px;
+      height: 43px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0 10px;
+    }
+  }
+}
+
+.carousel-nav{
+  width: 100%;
+  padding: 20px 0;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  color: black;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  cursor: url('/assets/images/cursor.png'), auto;
+  .mat-icon{
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  &:focus{
+    outline: 0 !important;
+  }
+}
+.arrow--left {
+  left: 5px;
+}
+.arrow--right {
+  left: auto;
+  right: 5px;
+}
+
+.arrow--disabled {
+  opacity: 0.4;
+}
+
+:host ::ng-deep .answers .mat-radio-container .mat-radio-outer-circle,
+:host ::ng-deep .answers .mat-radio-container .mat-radio-inner-circle{
+  border: 2px solid black;
+  width: 30px;
+  height: 30px;
+}
+:host ::ng-deep .answers .mat-radio-container{
+  width: 30px;
+  height: 30px;
 }
