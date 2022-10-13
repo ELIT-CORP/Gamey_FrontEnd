@@ -94,10 +94,10 @@ export class StartTrainingComponent implements OnInit {
         this.isLoading = true;
         let sum = this.answers.reduce((a, b) => a + b, 0)
         let score = this.answers.length/2 + 1;
-        // if(sum >= score)
+        if(sum >= score)
             await this.success();
-        // if (sum < score)
-        //     this.notifications.error('Que pena', 'Você não atingiu nota suficiente para ganhar um selo')
+        if (sum < score)
+            this.notifications.error('Que pena', 'Você não atingiu nota suficiente para ganhar um selo')
 
         this.isLoading = false;
         // this.router.navigate(['/profile']);
