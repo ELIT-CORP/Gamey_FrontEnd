@@ -96,7 +96,6 @@ export class CharacterComponent implements OnInit {
 
   async updateUser() {
     this.isLoading = true;
-    this.router.navigate(['/profile']);
 
     const model: User = {
       uid: this.user.uid,

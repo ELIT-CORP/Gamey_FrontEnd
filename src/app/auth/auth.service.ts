@@ -74,7 +74,11 @@ export class AuthService {
           'Sucesso',
           'Cadastro feito com sucesso',
         )
-        this.router.navigate(['/character']);
+        this.afAuth.authState.subscribe((user) => {
+          if (user) {
+            this.router.navigate(['/character']);
+          }
+        });
         return userCred;
       })
       .catch((error) => {
