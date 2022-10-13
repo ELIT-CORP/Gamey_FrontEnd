@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     }
     async getUser() {
         await this.afs.getUserByUid();
-        this.userSkills = JSON.parse(localStorage.getItem('userData')!);
+        this.userSkills = await JSON.parse(localStorage.getItem('userData')!);
         this.loggedUser = await this.authService.isLoggedIn();
     }
     async updateUser(){
