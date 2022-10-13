@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'character',
     component: CharacterComponent,
-    canActivate: [AuthGuardCharacter],
+    // canActivate: [AuthGuardCharacter],
   },
   {
     path: 'job',

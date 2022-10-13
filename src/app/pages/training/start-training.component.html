@@ -6,7 +6,7 @@
             <button class="nes-btn btn1 is-primary" (click)="goTo('job')">Vagas</button>
         </div>
     </nav>
-    <p class="course-name">{{course.name}}</p>
+        <p class="title">{{course.name}}</p>
     <div class="content">
         <div class="keen-slider keen-slider--vertical" #sliderRef>
             <div class="keen-slider__slide slide" *ngFor="let item of course.questions; let i=index">

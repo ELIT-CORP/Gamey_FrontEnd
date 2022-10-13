@@ -1,71 +1,125 @@
-<div class="container" [style]="'background: rgb(238, 249, 213); background: radial-gradient(circle, rgb(218, 218, 218) 10%,'+ bgColor + '100%)'">
-    <div class="form-container" [formGroup]="characterForm">
-        <div style="position: relative; width: 70%; height: 100%;">
-            <p class="title">Criação de Personagem</p>
-            <mat-stepper orientation="vertical" [linear]="true" #stepper>
-                <mat-step [stepControl]="characterForm">
-                    <ng-template matStepLabel>Selecione o Personagem</ng-template>
-                    <mat-radio-group class="steps" formControlName="character" style="width: 50%;">
-                        <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue, 'rgb(77, 146, 188)')"
-                            style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
-                            <img class="nes-avatar is-large dinos" alt="dinoBlue" [src]="dinoBlue" style="image-rendering: pixelated;">
-                        </mat-radio-button>
-                        <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed, 'rgb(188, 77, 79)')"
-                            style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
-                            <img class="nes-avatar is-large dinos" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
-                        </mat-radio-button>
-                        <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow, 'rgb(253, 199, 96)')"
-                            style="background: rgba(253, 199, 96, 0.5);" [value]="dinoYellow" disableRipple="true">
-                            <img class="nes-avatar is-large dinos" alt="dinoYellow" [src]="dinoYellow" style="image-rendering: pixelated;">
-                        </mat-radio-button>
-                        <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen, 'rgb(159, 188, 77)')"
-                            style="background: rgba(159, 188, 77, 0.5);" [value]="dinoGreen" disableRipple="true">
-                            <img class="nes-avatar is-large dinos" alt="dinoGreen" [src]="dinoGreen" style="image-rendering: pixelated;">
-                        </mat-radio-button>
-                    </mat-radio-group>
-                    <button matStepperNext class="nes-btn left-50" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'">Próximo</button>
-                </mat-step>
-                <mat-step [stepControl]="characterForm" [optional]="true">
-                    <ng-template matStepLabel>Selecione suas Habilidades</ng-template>
-                    <section class="steps" style="width: 60%; flex-direction: column; align-items: flex-start;">
-                        <mat-checkbox value="Porgramação" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-                            <img class="nes-avatar is-medium" alt="axe" src="/assets/character/Hard/axe.png" style="image-rendering: pixelated;">
-                            <p class="skill">Linguagem de Programação</p>
-                        </mat-checkbox>
-                        <span style="margin: 10px 0;"></span>
-                        <mat-checkbox value="Lógica" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-                            <img class="nes-avatar is-medium" alt="crossbow" src="/assets/character/Hard/crossbow.png" style="image-rendering: pixelated;">
-                            <p class="skill">Pensamento Lógico</p>
-                        </mat-checkbox>
-                        <span style="margin: 10px 0;"></span>
-                        <mat-checkbox value="UX" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-                            <img class="nes-avatar is-medium" alt="dagger" src="/assets/character/Hard/dagger.png" style="image-rendering: pixelated;">
-                            <p class="skill">Experiência de Usuário</p>
-                        </mat-checkbox>
-                        <span style="margin: 10px 0;"></span>
-                        <mat-checkbox value="IA" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-                            <img class="nes-avatar is-medium" alt="shield" src="/assets/character/Hard/shield.png" style="image-rendering: pixelated;">
-                            <p class="skill">Inteligência Artificial</p>
-                        </mat-checkbox>
-                        <span style="margin: 10px 0;"></span>
-                        <mat-checkbox value="Manejo de pessoas" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
-                            <img class="nes-avatar is-medium" alt="sword" src="/assets/character/Hard/sword.png" style="image-rendering: pixelated;">
-                            <p class="skill">Manejo de pessoas</p>
-                        </mat-checkbox>
-                    </section>
-                    <div class="left-50">
-                        <button matStepperPrevious class="nes-btn">Voltar</button>
-                        <button matStepperNext class="nes-btn" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'" style="margin-left: 15px" (click)="updateUser()">
-                            <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
-                            <span *ngIf="!isLoading">Concluir</span>
-                        </button>
-                    </div>
-                </mat-step>
-            </mat-stepper>
-        </div>
-        <div style="position: relative; width: 30%; height: 100%;">
-            <img class="selected_character" [src]="selectedDino">
-            <img class="altar" src="/assets/images/altar.png">
-        </div>
+<div class="container"
+     [style]="'background: rgb(238, 249, 213); background: radial-gradient(circle, rgb(218, 218, 218) 10%,'+ bgColor + '100%)'">
+  <div class="form-container" [formGroup]="characterForm">
+    <div style="position: relative; width: 70%; height: 100%;">
+      <p class="title">Criação de Personagem</p>
+      <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <mat-step [stepControl]="characterForm">
+          <ng-template matStepLabel>Selecione o Personagem</ng-template>
+          <mat-radio-group class="steps" formControlName="character" style="width: 50%;">
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoBlue, 'rgb(77, 146, 188)')"
+                              style="background: rgba(77, 146, 188, 0.5);" [value]="dinoBlue" disableRipple="true">
+              <img class="nes-avatar is-large dinos" alt="dinoBlue" [src]="dinoBlue"
+                   style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoRed, 'rgb(188, 77, 79)')"
+                              style="background: rgba(188, 77, 79, 0.5);" [value]="dinoRed" disableRipple="true">
+              <img class="nes-avatar is-large dinos" alt="dinoRed" [src]="dinoRed" style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoYellow, 'rgb(253, 199, 96)')"
+                              style="background: rgba(253, 199, 96, 0.5);" [value]="dinoYellow" disableRipple="true">
+              <img class="nes-avatar is-large dinos" alt="dinoYellow" [src]="dinoYellow"
+                   style="image-rendering: pixelated;">
+            </mat-radio-button>
+            <mat-radio-button class="select-button" (click)="selectCharacter(dinoGreen, 'rgb(159, 188, 77)')"
+                              style="background: rgba(159, 188, 77, 0.5);" [value]="dinoGreen" disableRipple="true">
+              <img class="nes-avatar is-large dinos" alt="dinoGreen" [src]="dinoGreen"
+                   style="image-rendering: pixelated;">
+            </mat-radio-button>
+          </mat-radio-group>
+          <button matStepperNext class="nes-btn left-50" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'">
+            Próximo
+          </button>
+        </mat-step>
+        <mat-step [stepControl]="characterForm" [optional]="true">
+          <ng-template matStepLabel>Selecione suas Habilidades</ng-template>
+          <section class="steps" style="width: 60%; flex-direction: column; align-items: flex-start;">
+            <mat-checkbox value="Porgramação" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="axe" src="/assets/character/Hard/axe.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Linguagem de Programação</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="Lógica" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="crossbow" src="/assets/character/Hard/crossbow.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Pensamento Lógico</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="UX" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="dagger" src="/assets/character/Hard/dagger.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Experiência de Usuário</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="IA" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="shield" src="/assets/character/Hard/shield.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Inteligência Artificial</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="Manejo de pessoas" disableRipple="true" style="width: 80%;"
+                          (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="sword" src="/assets/character/Hard/sword.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Manejo de pessoas</p>
+            </mat-checkbox>
+          </section>
+          <div class="left-50">
+            <button matStepperPrevious class="nes-btn">Voltar</button>
+            <button matStepperNext class="nes-btn" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'">
+              Próximo
+            </button>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="characterForm" [optional]="false">
+          <ng-template matStepLabel>Teste de Personalidade</ng-template>
+          <section class="steps" style="width: 60%; flex-direction: column; align-items: flex-start;">
+            <mat-checkbox value="Porgramação" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="axe" src="/assets/character/Hard/axe.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Linguagem de Programação</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="Lógica" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="crossbow" src="/assets/character/Hard/crossbow.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Pensamento Lógico</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="UX" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="dagger" src="/assets/character/Hard/dagger.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Experiência de Usuário</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="IA" disableRipple="true" style="width: 80%;" (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="shield" src="/assets/character/Hard/shield.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Inteligência Artificial</p>
+            </mat-checkbox>
+            <span style="margin: 10px 0;"></span>
+            <mat-checkbox value="Manejo de pessoas" disableRipple="true" style="width: 80%;"
+                          (change)="toggleSkills($event)">
+              <img class="nes-avatar is-medium" alt="sword" src="/assets/character/Hard/sword.png"
+                   style="image-rendering: pixelated;">
+              <p class="skill">Manejo de pessoas</p>
+            </mat-checkbox>
+          </section>
+          <div class="left-50">
+            <button matStepperPrevious class="nes-btn">Voltar</button>
+            <button matStepperNext class="nes-btn" [ngClass]="characterForm.valid ? 'is-success' : 'is-disabled'"
+                    style="margin-left: 15px" (click)="updateUser()">
+              <mat-spinner *ngIf="isLoading" [diameter]="40"></mat-spinner>
+              <span *ngIf="!isLoading">Concluir</span>
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
     </div>
+    <div style="position: relative; width: 30%; height: 100%;">
+      <img class="selected_character" [src]="selectedDino">
+      <img class="altar" src="/assets/images/altar.png">
+    </div>
+  </div>
 </div>

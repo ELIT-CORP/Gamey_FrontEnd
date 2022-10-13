@@ -25,7 +25,7 @@ export class StartTrainingComponent implements OnInit {
     slider!: KeenSliderInstance;
     dotHelper: Array<Number> = []
 
-    @Input() indicators = true;
+    @Input() indicators = false;
     @Input() autoSlide = false;
     @Input() slideInterval = 10000;
 

@@ -1,14 +1,29 @@
 <div class="container">
-    <nav class="nav">
-        <img src="/assets/images/logo.png" class="logo"/>
-        <div style="display: flex;">
-            <button (click)="goTo('profile')" class="profileBtn nes-btn">Perfil</button>
-            <button (click)="goTo('training')" class="trainingBtn nes-btn">Treinamento</button>
-        </div>
-    </nav>
-    <div class="job-list">
-        <div class="job">
-            <img src="/assets/images/joBg.png"/>
-        </div>
+  <nav class="nav">
+    <img src="/assets/images/logo.png" class="logo"/>
+    <div style="display: flex;">
+      <button (click)="goTo('profile')" class="profileBtn nes-btn">Perfil</button>
+      <button (click)="goTo('training')" class="trainingBtn nes-btn">Treinamento</button>
     </div>
+  </nav>
+  <div class="job-list">
+    <div *ngIf="jobs != undefined" style="display: flex">
+      <div class="job" *ngFor="let job of jobs">
+        <div class="info-card">
+          <h2 style="text-align: center">{{job.title}}</h2>
+          <h3>Requisitos: </h3>
+          <ul style="padding-left: 35px" class="nes-list is-disc"
+              *ngFor="let requirement of job.requirements;">
+            <li>{{requirement}}</li>
+          </ul>
+          <h3>Descrição: </h3>
+          <p class="description-container">{{job.description}}</p>
+          <button (click)="openJob(job)" class="trainingBtn nes-btn card">Ver Mais...</button>
+        </div>
+      </div>
+    </div>
+    <!--    <div style="display:flex; justify-content: end;width: 100%">-->
+    <!--      <button (click)="addJob()" class="addJob-btn nes-btn">Adicionar Vagas</button>-->
+    <!--    </div>-->
+  </div>
 </div>

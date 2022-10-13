@@ -59,7 +59,7 @@ export class CharacterComponent implements OnInit {
         }
         this.isLoading = false;
         await this.afs.addUser(model)
-        this.router.navigate(['/profile']);
+        await this.router.navigate(['/profile']);
     }
     toggleSkills(event: MatCheckboxChange){
         if(event.source.checked)

@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {getFirestore} from "firebase/firestore";
+import {User} from '../model/user';
+import {AuthService} from '../auth/auth.service';
+import {first, map, Observable} from "rxjs";
+import {Job} from "../model/job";
 import { db } from 'src/environments/firebase';
-import { getFirestore, doc, setDoc, QuerySnapshot, getDoc } from "firebase/firestore"; 
-import { User } from '../model/user';
-import { AuthService } from '../auth/auth.service';
 import { Course } from '../model/course';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +16,28 @@ export class FirestoreDataService {
   db = getFirestore();
 
   constructor(private _afs: AngularFirestore, private authService: AuthService) {
-   }
-   
+  }
+
   async addUser(user: User) {
     await this.authService.updateProfileUrl(user.character)
     await this._afs.collection('/user_skills').doc(user.uid).set({
       skills: user.skills,
       trait: user.trait
-     });
-   }
+    });
+  }
 
-   getUsers(){
-     return this._afs.collection('/user_skills').snapshotChanges();
-   }
- 
-   async userHasProfile(user: any) : Promise<boolean> {
-     const userRef = await this._afs.collection('/user_skills').doc(user.uid).ref.get();
-      if(userRef.exists){
-        return true;
-      } else {
-        return false;
-      }
-    };  
+  getUsers() {
+    return this._afs.collection('/user_skills').snapshotChanges();
+  }
+
+  async userHasProfile(user: any): Promise<boolean> {
+    const userRef = await this._afs.collection('/user_skills').doc(user.uid).ref.get();
+    if (userRef.exists) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   async getUserByUid() {
     let loggedUser = this.authService.isLoggedIn();
@@ -45,6 +46,27 @@ export class FirestoreDataService {
     localStorage.setItem('userData', JSON.stringify(doc.data()));
   }
 
+  // updateCharacter(username: any, character: any, userId: any){
+  //   this._afs.collection('user_skills').doc(userId).ref.get().then((doc) => {
+  //     localStorage.setItem('userData', JSON.stringify(doc.data()));
+  //   });
+  // }
+
+  // getJob() {
+  //   return this._afs.collection('/Jobs').stateChanges();
+  // }
+
+  getJobs(): Observable<Job[]> {
+    return this._afs.collection<Job>('Jobs').valueChanges();
+  }
+
+  // addJob(job: Job) {
+  //   return  this._afs.collection('/Jobs').doc(job.title).set({
+  //     title: job.title,
+  //     requirements: job.requirements,
+  //     description: job.description,
+  //   });
+  // }
   getCourses(): Observable<Course[]> {
     return this._afs.collection<Course>('Courses').valueChanges();
   }

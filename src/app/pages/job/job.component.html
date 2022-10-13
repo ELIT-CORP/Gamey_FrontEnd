@@ -1,0 +1,12 @@
+<div class="job" style="padding: 120px">
+  <div class="info-card">
+    <h2 style="text-align: center">{{job.title}}</h2>
+    <h3>Requisitos: </h3>
+    <ul style="padding-left: 35px" class="nes-list is-disc" *ngFor="let requirement of job.requirements; let i=index">
+      <li>{{requirement}}</li>
+    </ul>
+    <h3>Descrição: </h3>
+    <p class="description-container">{{job.description}}</p>
+    <button  class="nes-btn is-primary">Quero essa vaga!</button>
+  </div>
+</div>
