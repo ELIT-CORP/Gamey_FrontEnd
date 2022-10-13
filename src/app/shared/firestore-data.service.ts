@@ -48,4 +48,8 @@ export class FirestoreDataService {
   getCourses(): Observable<Course[]> {
     return this._afs.collection<Course>('Courses').valueChanges();
   }
+  async getCourseById(courseId: string) {
+    const doc = await this._afs.collection<Course>('/Courses').doc(courseId).ref.get();
+    return doc.data();
+  }
 }

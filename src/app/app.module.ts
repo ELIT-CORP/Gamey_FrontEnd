@@ -31,6 +31,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { TrainingComponent } from './pages/training/training.component';
 
 import { environment } from "../environments/environment";
+import { StartTrainingComponent } from './pages/training/start-training.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { environment } from "../environments/environment";
     ProfileComponent,
     LoginComponent,
     TrainingComponent,
+    StartTrainingComponent
   ],
   imports: [
     BrowserModule,

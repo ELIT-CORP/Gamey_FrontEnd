@@ -6,7 +6,25 @@
             <button class="nes-btn btn1 is-primary" (click)="goTo('job')">Vagas</button>
         </div>
     </nav>
-    <div>
-
+    <p class="course-name">{{course.name}}</p>
+    <div class="content">
+        <div class="keen-slider keen-slider--vertical" #sliderRef>
+            <div class="keen-slider__slide slide" *ngFor="let item of course.questions; let i=index">
+                <div class="item">
+                    <h1 style="margin: 0" class="title">{{item.text}}</h1>
+                    <!-- <p class="description">{{item.description}}</p>
+                    <button class="playBtn nes-btn is-warning">{{item.button}}</button> -->
+                </div>
+            </div>
+        </div>
+        <button mat-icon-button [ngClass]="'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')"
+            (click)="slider.prev()">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button *ngIf="slider" mat-icon-button
+            [ngClass]="'arrow arrow--right ' + (slider.track.details.slides.length - 1 === currentSlide ? 'arrow--disabled' : '')"
+            (click)="slider.next()">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
     </div>
 </div>
